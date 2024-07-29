@@ -41,17 +41,24 @@
 		<ul id="n_profile">
 
 			<?php
-				while($data_menu_acls=mysqli_fetch_array($query_menu_acls)){
+				// while($data_menu_acls=mysqli_fetch_array($query_menu_acls)){
 			?>
 
-				<li <?=$segmen[0] == "Detail-$data_menu_acls[MENUACL]" ? 'class="subaktif"' : ''?> >
+				<!-- <li <?=$segmen[0] == "Detail-$data_menu_acls[MENUACL]" ? 'class="subaktif"' : ''?> >
 					<i class="fa fa-cogs sub_profile_p"></i>
 					<a href="?Detail-<?=$data_menu_acls['MENUACL']?>&&header=<?="Profile"?>">
 						<?=$data_menu_acls['MENUACL']?>
 					</a>
-				</li>
+				</li> -->
 
-			<?php } ?>
+			<?php
+				// }
+			?>
+
+			<li <?=$segmen[0] == 'Detail-Pengaturan' ? 'class="subaktif"' : ''?>>
+				<i class="fa fa-cogs sub_profile_p"></i>
+				<a href="?Detail-Pengaturan&&header=<?php echo "Profile" ?>">Akun</a>
+			</li>
 
 		</ul>
 </ul>
