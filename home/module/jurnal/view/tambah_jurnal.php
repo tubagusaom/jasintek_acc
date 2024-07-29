@@ -14,6 +14,13 @@
 	</tr>
 
 	<tr>
+		<td>Actual Date</td>
+		<td>
+			<input type="date" name="a_date" value="" placeholder="max 20 character">
+		</td>
+	</tr>
+
+	<tr>
 		<td colspan="2" style="border-top:2px solid #999"><b style="color:#0081ca">DEBIT</b></td>
 	</tr>
 
@@ -95,12 +102,6 @@
 		<td>Kode Reffrensi</td>
 		<td>
 			<input type="text" name="reff" value="" placeholder="max 20 character">
-		</td>
-	</tr>
-	<tr>
-		<td>Actual Date</td>
-		<td>
-			<input type="date" name="a_date" value="" placeholder="max 20 character">
 		</td>
 	</tr>
 	<tr>
