@@ -50,11 +50,7 @@
         <?php } ?>
 			</td>
 		</tr>
-		<tr>
-			<td>Username</td>
-			<td><input type="text" name="" value="<?php echo $data[1] ?>" disabled></td>
-		</tr>
-    <tr>
+		
 			<td>Hak Akses</td>
 			<?php
 
@@ -73,6 +69,10 @@
 					}
 			?>
 			<td><input type="text" name="" value="<?= $hak ?>" disabled></td>
+		</tr>
+		<tr>
+			<td>Username</td>
+			<td><input type="text" name="" value="<?php echo $data[1] ?>" disabled></td>
 		</tr>
 		<tr>
 			<td>Password</td>
