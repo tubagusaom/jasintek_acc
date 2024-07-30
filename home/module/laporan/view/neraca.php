@@ -300,6 +300,203 @@
   <tr bgcolor="whitesmoke"><td colspan="4">&nbsp;</td></tr>
   <!-- batas -->
 
+
+  <tr>
+    <!-- start judul aktiva tetap -->
+    <?php
+      $sqlreport1  	="SELECT `kd_report`, `desc_report` FROM `report` WHERE kd_report='205' AND stts_report NOT LIKE '3'";
+      $queryreport1	=mysqli_query($koneksi,$sqlreport1);
+      $datareport1  =mysqli_fetch_array($queryreport1);
+    ?>
+    <th colspan="2"><?php echo "$datareport1[1]"; ?></th>
+    <!-- end judul aktiva tetap -->
+
+    <!-- start judul kewajiban Jangka Panjang -->
+    <?php
+      $sqlreport2  	="SELECT `kd_report`, `desc_report` FROM `report` WHERE kd_report='206' AND stts_report NOT LIKE '3'";
+      $queryreport2	=mysqli_query($koneksi,$sqlreport2);
+      $datareport2  =mysqli_fetch_array($queryreport2);
+    ?>
+    <th colspan="2"><?php echo "$datareport2[1]"; ?></th>
+    <!-- end judul kewajiban Jangka Panjang -->
+  </tr>
+
+  <tr>
+    <!-- start aktiva lancar -->
+    <td colspan="2" width="50%" style="background:#fff">
+      <table style="background:#fff">
+        <?php
+          $tnr1=0;
+      		$sqlgroup1	  ="SELECT `kd_group`, `kd_acount`, `kd_report` FROM `report_group` WHERE stts_group NOT LIKE '3' AND kd_report = '$datareport1[0]' ORDER BY id ASC";
+      		$querygroup1	=mysqli_query($koneksi,$sqlgroup1);
+      		while($datagroup1=mysqli_fetch_array($querygroup1))
+      		{
+            $sqlacountg1	  ="SELECT `desc_acount` FROM `acount` WHERE stts_acount NOT LIKE '3' AND kd_acount = '$datagroup1[1]'";
+        		$queryacountg1	=mysqli_query($koneksi,$sqlacountg1);
+        		$dataacountg1   =mysqli_fetch_array($queryacountg1);
+
+            $sf1=0;
+            $sqlformula1	  ="SELECT `kd_acount`, `kd_group`, `jenis_formula` FROM `report_formula` WHERE `stts_formula` NOT LIKE '3' AND kd_group = '$datagroup1[0]'";
+            $queryformula1	=mysqli_query($koneksi,$sqlformula1);
+            while($dataformula1=mysqli_fetch_array($queryformula1)){
+
+              $sqlsumformula1=
+                        "SELECT
+                          SUM(IF(`jenis_trans` = 'D',`saldo_trans`,0)) AS DEBIT1,
+                          SUM(IF(`jenis_trans` = 'K',`saldo_trans`,0)) AS KREDIT1
+                        FROM trans WHERE
+                          stts_trans NOT LIKE '3' AND
+                          kd_acount = $dataformula1[0]
+                          $acuansaldo
+                        ";
+              $querysumformula1	=mysqli_query($koneksi,$sqlsumformula1);
+              $datasumformula1  =mysqli_fetch_array($querysumformula1);
+
+              if ($dataformula1[2]=='D') {
+                $totalmutasi1=$datasumformula1['DEBIT1']-$datasumformula1['KREDIT1'];
+              }else {
+                $totalmutasi1=$datasumformula1['KREDIT1']-$datasumformula1['DEBIT1'];
+              }
+              $sf1 += $totalmutasi1;
+            }
+
+            if ($sf1==0) {
+              echo "";
+            }else {
+      	?>
+        <tr class="hover" bgcolor="#fff">
+          <td style="border-bottom:1px solid #ddd">
+            <?php echo "$dataacountg1[0]"; ?>
+          </td>
+          <td align="right" style="border-bottom:1px solid #ddd">
+            <?php
+              $neraca1=$sf1;
+              $tnr1 += $neraca1;
+              $potongneraca1=substr($neraca1,0,1);
+
+              if ($potongneraca1=="-") {
+                Echo "<font style=color:red>"; echo number_format($neraca1,0,',','.'); Echo "</font>";
+              }else {
+                echo number_format($neraca1,0,',','.');
+              }
+            ?>
+          </td>
+        </tr>
+        <?php }} ?>
+      </table>
+    </td>
+    <!-- end aktiva lancar -->
+
+    <!-- start Kewajiban Lancar -->
+    <td colspan="2" width="50%" style="background:#fff">
+      <table style="background:#fff">
+        <?php
+          $tnr2=0;
+      		$sqlgroup2	  ="SELECT `kd_group`, `kd_acount`, `kd_report` FROM `report_group` WHERE stts_group NOT LIKE '3' AND kd_report = '$datareport2[0]' ORDER BY id ASC";
+      		$querygroup2	=mysqli_query($koneksi,$sqlgroup2);
+      		while($datagroup2=mysqli_fetch_array($querygroup2))
+      		{
+            $sqlacountg2	  ="SELECT `desc_acount` FROM `acount` WHERE stts_acount NOT LIKE '3' AND kd_acount = '$datagroup2[1]'";
+        		$queryacountg2	=mysqli_query($koneksi,$sqlacountg2);
+        		$dataacountg2   =mysqli_fetch_array($queryacountg2);
+
+            $sf2=0;
+            $sqlformula2	  ="SELECT `kd_acount`, `kd_group`, `jenis_formula` FROM `report_formula` WHERE `stts_formula` NOT LIKE '3' AND kd_group = '$datagroup2[0]'";
+            $queryformula2	=mysqli_query($koneksi,$sqlformula2);
+            while($dataformula2=mysqli_fetch_array($queryformula2)){
+
+              $sqlsumformula2=
+                        "SELECT
+                          SUM(IF(`jenis_trans` = 'D',`saldo_trans`,0)) AS DEBIT2,
+                          SUM(IF(`jenis_trans` = 'K',`saldo_trans`,0)) AS KREDIT2
+                        FROM trans WHERE
+                          stts_trans NOT LIKE '3' AND
+                          kd_acount = $dataformula2[0]
+                          $acuansaldo
+                        ";
+              $querysumformula2	=mysqli_query($koneksi,$sqlsumformula2);
+              $datasumformula2  =mysqli_fetch_array($querysumformula2);
+
+              if ($dataformula2[2]=='D') {
+                $totalmutasi2=$datasumformula2['DEBIT2']-$datasumformula2['KREDIT2'];
+              }else {
+                $totalmutasi2=$datasumformula2['KREDIT2']-$datasumformula2['DEBIT2'];
+              }
+              $sf2 += $totalmutasi2;
+            }
+
+            if ($sf2==0) {
+              echo "";
+            }else {
+      	?>
+        <tr class="hover" bgcolor="#fff">
+          <td style="border-bottom:1px solid #ddd"><?php echo "$dataacountg2[0]"; ?></td>
+          <td align="right" style="border-bottom:1px solid #ddd">
+            <?php
+              $neraca2=$sf2;
+              $tnr2 += $neraca2;
+              $potongneraca2=substr($neraca2,0,1);
+              if ($neraca2==0) {
+                echo "-";
+              }else {
+                if ($potongneraca2=="-") {
+                  Echo "<font style=color:red>"; echo number_format($neraca2,0,',','.'); Echo "</font>";
+                }else {
+                  echo number_format($neraca2,0,',','.');
+                }
+              }
+            ?>
+          </td>
+        </tr>
+        <?php }} ?>
+      </table>
+    </td>
+    <!-- end Kewajiban Lancar -->
+  </tr>
+
+  <tr bgcolor="#ddd">
+    <!-- start jumlah aktiva lancar -->
+    <td style="padding-left:10px"><b>Jumlah <?php echo "$datareport1[1]"; ?></b></td>
+    <td align="right" style="padding-right:10px"><b>
+      <?php
+        $potongtnr1=substr($tnr1,0,1);
+        if ($tnr1==0) {
+          echo "-";
+        }else {
+          if ($potongtnr1=="-") {
+            Echo "<font style=color:red>"; echo number_format($tnr1,0,',','.'); Echo "</font>";
+          }else {
+            echo number_format($tnr1,0,',','.');
+          }
+        }
+      ?>
+    </b></td>
+    <!-- end jumlah aktiva lancar -->
+
+    <!-- start jumlah Kewajiban Lancar -->
+    <td style="padding-left:10px"><b>Jumlah <?php echo "$datareport2[1]"; ?></b></td>
+    <td align="right" style="padding-right:10px"><b>
+      <?php
+        $potongtnr2=substr($tnr2,0,1);
+        if ($tnr2==0) {
+          echo "-";
+        }else {
+          if ($potongtnr2=="-") {
+            Echo "<font style=color:red>"; echo number_format($tnr2,0,',','.'); Echo "</font>";
+          }else {
+            echo number_format($tnr2,0,',','.');
+          }
+        }
+      ?>
+    </b></td>
+    <!-- end jumlah Kewajiban Lancar -->
+  </tr>
+
+  <!-- batas -->
+  <tr bgcolor="whitesmoke"><td colspan="4">&nbsp;</td></tr>
+  <!-- batas -->
+
+
   <tr>
     <!-- start judul Aktiva Lain-Lain -->
     <?php
