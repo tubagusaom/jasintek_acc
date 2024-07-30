@@ -11,8 +11,12 @@
 			<li <?=$segmen[0] == 'Input-Account_sub' ? 'class="subaktif"' : ''?>><i class="fa fa-window-minimize"></i><a href="?Input-Account_sub&&header=<?php echo "Account" ?>">Sub Account</a></li>
 			<li <?=$segmen[0] == 'Data-Account' ? 'class="subaktif"' : ''?>><i class="fa fa-window-minimize"></i><a href="?Data-Account&&header=<?php echo "Account" ?>">Data</a></li>
 			<li <?=$segmen[0] == 'Configurasi-Account' ? 'class="subaktif"' : ''?>><i class="fa fa-window-minimize"></i><a href="?Configurasi-Account&&header=<?php echo "Account" ?>">Konfigurasi</a></li>
-			<?php   if ($akses=='default' OR $akses=='superuser') { ?>
-			<li <?=$segmen[0] == 'Configurasi-Account' ? 'class="subaktif"' : ''?>><i class="fa fa-window-minimize"></i><a href="?Configurasi-Account&&header=<?php echo "Account" ?>">Konfigurasi</a></li>
-			<?php } ?>
+			<?php
+				if ($akses=='default' OR $akses=='superuser') {
+			?>
+				<!-- <li <?=$segmen[0] == 'Configurasi-Account' ? 'class="subaktif"' : ''?>><i class="fa fa-window-minimize"></i><a href="?Configurasi-Account&&header=<?php echo "Account" ?>">Konfigurasi</a></li> -->
+			<?php
+				}
+			?>
 		</ul>
 </ul>

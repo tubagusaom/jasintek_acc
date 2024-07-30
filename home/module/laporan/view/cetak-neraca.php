@@ -594,7 +594,7 @@
           Heni Wahyuni
         </p>
         <!-- <p align="center" style="background:<?php Echo "$bgcolor"; ?> ;margin-top:0; margin-bottom:0"> -->
-        <p align="center" ;margin-top:0; margin-bottom:0">
+        <p align="center" style="margin-top:0; margin-bottom:0">
           <?php
           //  echo "$hak";
           ?>
