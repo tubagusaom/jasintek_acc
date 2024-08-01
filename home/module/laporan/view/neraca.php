@@ -301,23 +301,30 @@
   <!-- batas -->
 
 
+
+
+
+
+  
+
+
   <tr>
     <!-- start judul aktiva tetap -->
     <?php
-      $sqlreport1  	="SELECT `kd_report`, `desc_report` FROM `report` WHERE kd_report='205' AND stts_report NOT LIKE '3'";
-      $queryreport1	=mysqli_query($koneksi,$sqlreport1);
-      $datareport1  =mysqli_fetch_array($queryreport1);
+      $sqlreport5  	="SELECT `kd_report`, `desc_report` FROM `report` WHERE kd_report='205' AND stts_report NOT LIKE '3'";
+      $queryreport5	=mysqli_query($koneksi,$sqlreport5);
+      $datareport5  =mysqli_fetch_array($queryreport5);
     ?>
-    <th colspan="2"><?php echo "$datareport1[1]"; ?></th>
+    <th colspan="2"><?php echo "$datareport5[1]"; ?></th>
     <!-- end judul aktiva tetap -->
 
     <!-- start judul kewajiban Jangka Panjang -->
     <?php
-      $sqlreport2  	="SELECT `kd_report`, `desc_report` FROM `report` WHERE kd_report='206' AND stts_report NOT LIKE '3'";
-      $queryreport2	=mysqli_query($koneksi,$sqlreport2);
-      $datareport2  =mysqli_fetch_array($queryreport2);
+      $sqlreport6  	="SELECT `kd_report`, `desc_report` FROM `report` WHERE kd_report='206' AND stts_report NOT LIKE '3'";
+      $queryreport6	=mysqli_query($koneksi,$sqlreport6);
+      $datareport6  =mysqli_fetch_array($queryreport6);
     ?>
-    <th colspan="2"><?php echo "$datareport2[1]"; ?></th>
+    <th colspan="2"><?php echo "$datareport6[1]"; ?></th>
     <!-- end judul kewajiban Jangka Panjang -->
   </tr>
 
@@ -326,58 +333,58 @@
     <td colspan="2" width="50%" style="background:#fff">
       <table style="background:#fff">
         <?php
-          $tnr1=0;
-      		$sqlgroup1	  ="SELECT `kd_group`, `kd_acount`, `kd_report` FROM `report_group` WHERE stts_group NOT LIKE '3' AND kd_report = '$datareport1[0]' ORDER BY id ASC";
-      		$querygroup1	=mysqli_query($koneksi,$sqlgroup1);
-      		while($datagroup1=mysqli_fetch_array($querygroup1))
+          $tnr5=0;
+      		$sqlgroup5	  ="SELECT `kd_group`, `kd_acount`, `kd_report` FROM `report_group` WHERE stts_group NOT LIKE '3' AND kd_report = '$datareport5[0]' ORDER BY id ASC";
+      		$querygroup5	=mysqli_query($koneksi,$sqlgroup5);
+      		while($datagroup5=mysqli_fetch_array($querygroup5))
       		{
-            $sqlacountg1	  ="SELECT `desc_acount` FROM `acount` WHERE stts_acount NOT LIKE '3' AND kd_acount = '$datagroup1[1]'";
-        		$queryacountg1	=mysqli_query($koneksi,$sqlacountg1);
-        		$dataacountg1   =mysqli_fetch_array($queryacountg1);
+            $sqlacountg5	  ="SELECT `desc_acount` FROM `acount` WHERE stts_acount NOT LIKE '3' AND kd_acount = '$datagroup5[1]'";
+        		$queryacountg5	=mysqli_query($koneksi,$sqlacountg5);
+        		$dataacountg5   =mysqli_fetch_array($queryacountg5);
 
-            $sf1=0;
-            $sqlformula1	  ="SELECT `kd_acount`, `kd_group`, `jenis_formula` FROM `report_formula` WHERE `stts_formula` NOT LIKE '3' AND kd_group = '$datagroup1[0]'";
-            $queryformula1	=mysqli_query($koneksi,$sqlformula1);
-            while($dataformula1=mysqli_fetch_array($queryformula1)){
+            $sf5=0;
+            $sqlformula5	  ="SELECT `kd_acount`, `kd_group`, `jenis_formula` FROM `report_formula` WHERE `stts_formula` NOT LIKE '3' AND kd_group = '$datagroup5[0]'";
+            $queryformula5	=mysqli_query($koneksi,$sqlformula5);
+            while($dataformula5=mysqli_fetch_array($queryformula5)){
 
-              $sqlsumformula1=
+              $sqlsumformula5=
                         "SELECT
-                          SUM(IF(`jenis_trans` = 'D',`saldo_trans`,0)) AS DEBIT1,
-                          SUM(IF(`jenis_trans` = 'K',`saldo_trans`,0)) AS KREDIT1
+                          SUM(IF(`jenis_trans` = 'D',`saldo_trans`,0)) AS DEBIT5,
+                          SUM(IF(`jenis_trans` = 'K',`saldo_trans`,0)) AS KREDIT5
                         FROM trans WHERE
                           stts_trans NOT LIKE '3' AND
-                          kd_acount = $dataformula1[0]
+                          kd_acount = $dataformula5[0]
                           $acuansaldo
                         ";
-              $querysumformula1	=mysqli_query($koneksi,$sqlsumformula1);
-              $datasumformula1  =mysqli_fetch_array($querysumformula1);
+              $querysumformula5	=mysqli_query($koneksi,$sqlsumformula5);
+              $datasumformula5  =mysqli_fetch_array($querysumformula5);
 
-              if ($dataformula1[2]=='D') {
-                $totalmutasi1=$datasumformula1['DEBIT1']-$datasumformula1['KREDIT1'];
+              if ($dataformula5[2]=='D') {
+                $totalmutasi5=$datasumformula5['DEBIT5']-$datasumformula5['KREDIT5'];
               }else {
-                $totalmutasi1=$datasumformula1['KREDIT1']-$datasumformula1['DEBIT1'];
+                $totalmutasi5=$datasumformula5['KREDIT5']-$datasumformula5['DEBIT5'];
               }
-              $sf1 += $totalmutasi1;
+              $sf5 += $totalmutasi5;
             }
 
-            if ($sf1==0) {
+            if ($sf5==0) {
               echo "";
             }else {
       	?>
         <tr class="hover" bgcolor="#fff">
           <td style="border-bottom:1px solid #ddd">
-            <?php echo "$dataacountg1[0]"; ?>
+            <?php echo "$dataacountg5[0]"; ?>
           </td>
           <td align="right" style="border-bottom:1px solid #ddd">
             <?php
-              $neraca1=$sf1;
-              $tnr1 += $neraca1;
-              $potongneraca1=substr($neraca1,0,1);
+              $neraca5=$sf5;
+              $tnr5 += $neraca5;
+              $potongneraca5=substr($neraca5,0,1);
 
-              if ($potongneraca1=="-") {
-                Echo "<font style=color:red>"; echo number_format($neraca1,0,',','.'); Echo "</font>";
+              if ($potongneraca5=="-") {
+                Echo "<font style=color:red>"; echo number_format($neraca5,0,',','.'); Echo "</font>";
               }else {
-                echo number_format($neraca1,0,',','.');
+                echo number_format($neraca5,0,',','.');
               }
             ?>
           </td>
@@ -391,58 +398,58 @@
     <td colspan="2" width="50%" style="background:#fff">
       <table style="background:#fff">
         <?php
-          $tnr2=0;
-      		$sqlgroup2	  ="SELECT `kd_group`, `kd_acount`, `kd_report` FROM `report_group` WHERE stts_group NOT LIKE '3' AND kd_report = '$datareport2[0]' ORDER BY id ASC";
-      		$querygroup2	=mysqli_query($koneksi,$sqlgroup2);
-      		while($datagroup2=mysqli_fetch_array($querygroup2))
+          $tnr6=0;
+      		$sqlgroup6	  ="SELECT `kd_group`, `kd_acount`, `kd_report` FROM `report_group` WHERE stts_group NOT LIKE '3' AND kd_report = '$datareport6[0]' ORDER BY id ASC";
+      		$querygroup6	=mysqli_query($koneksi,$sqlgroup6);
+      		while($datagroup6=mysqli_fetch_array($querygroup6))
       		{
-            $sqlacountg2	  ="SELECT `desc_acount` FROM `acount` WHERE stts_acount NOT LIKE '3' AND kd_acount = '$datagroup2[1]'";
-        		$queryacountg2	=mysqli_query($koneksi,$sqlacountg2);
-        		$dataacountg2   =mysqli_fetch_array($queryacountg2);
+            $sqlacountg6	  ="SELECT `desc_acount` FROM `acount` WHERE stts_acount NOT LIKE '3' AND kd_acount = '$datagroup6[1]'";
+        		$queryacountg6	=mysqli_query($koneksi,$sqlacountg6);
+        		$dataacountg6   =mysqli_fetch_array($queryacountg6);
 
-            $sf2=0;
-            $sqlformula2	  ="SELECT `kd_acount`, `kd_group`, `jenis_formula` FROM `report_formula` WHERE `stts_formula` NOT LIKE '3' AND kd_group = '$datagroup2[0]'";
-            $queryformula2	=mysqli_query($koneksi,$sqlformula2);
-            while($dataformula2=mysqli_fetch_array($queryformula2)){
+            $sf6=0;
+            $sqlformula6	  ="SELECT `kd_acount`, `kd_group`, `jenis_formula` FROM `report_formula` WHERE `stts_formula` NOT LIKE '3' AND kd_group = '$datagroup6[0]'";
+            $queryformula6	=mysqli_query($koneksi,$sqlformula6);
+            while($dataformula6=mysqli_fetch_array($queryformula6)){
 
-              $sqlsumformula2=
+              $sqlsumformula6=
                         "SELECT
-                          SUM(IF(`jenis_trans` = 'D',`saldo_trans`,0)) AS DEBIT2,
-                          SUM(IF(`jenis_trans` = 'K',`saldo_trans`,0)) AS KREDIT2
+                          SUM(IF(`jenis_trans` = 'D',`saldo_trans`,0)) AS DEBIT6,
+                          SUM(IF(`jenis_trans` = 'K',`saldo_trans`,0)) AS KREDIT6
                         FROM trans WHERE
                           stts_trans NOT LIKE '3' AND
-                          kd_acount = $dataformula2[0]
+                          kd_acount = $dataformula6[0]
                           $acuansaldo
                         ";
-              $querysumformula2	=mysqli_query($koneksi,$sqlsumformula2);
-              $datasumformula2  =mysqli_fetch_array($querysumformula2);
+              $querysumformula6	=mysqli_query($koneksi,$sqlsumformula6);
+              $datasumformula6  =mysqli_fetch_array($querysumformula6);
 
-              if ($dataformula2[2]=='D') {
-                $totalmutasi2=$datasumformula2['DEBIT2']-$datasumformula2['KREDIT2'];
+              if ($dataformula6[2]=='D') {
+                $totalmutasi6=$datasumformula6['DEBIT6']-$datasumformula2['KREDIT6'];
               }else {
-                $totalmutasi2=$datasumformula2['KREDIT2']-$datasumformula2['DEBIT2'];
+                $totalmutasi6=$datasumformula6['KREDIT6']-$datasumformula2['DEBIT6'];
               }
-              $sf2 += $totalmutasi2;
+              $sf6 += $totalmutasi6;
             }
 
-            if ($sf2==0) {
+            if ($sf6==0) {
               echo "";
             }else {
       	?>
         <tr class="hover" bgcolor="#fff">
-          <td style="border-bottom:1px solid #ddd"><?php echo "$dataacountg2[0]"; ?></td>
+          <td style="border-bottom:1px solid #ddd"><?php echo "$dataacountg6[0]"; ?></td>
           <td align="right" style="border-bottom:1px solid #ddd">
             <?php
-              $neraca2=$sf2;
-              $tnr2 += $neraca2;
-              $potongneraca2=substr($neraca2,0,1);
-              if ($neraca2==0) {
+              $neraca6=$sf6;
+              $tnr6 += $neraca6;
+              $potongneraca6=substr($neraca6,0,1);
+              if ($neraca6==0) {
                 echo "-";
               }else {
-                if ($potongneraca2=="-") {
-                  Echo "<font style=color:red>"; echo number_format($neraca2,0,',','.'); Echo "</font>";
+                if ($potongneraca6=="-") {
+                  Echo "<font style=color:red>"; echo number_format($neraca6,0,',','.'); Echo "</font>";
                 }else {
-                  echo number_format($neraca2,0,',','.');
+                  echo number_format($neraca6,0,',','.');
                 }
               }
             ?>
@@ -456,17 +463,17 @@
 
   <tr bgcolor="#ddd">
     <!-- start jumlah aktiva lancar -->
-    <td style="padding-left:10px"><b>Jumlah <?php echo "$datareport1[1]"; ?></b></td>
+    <td style="padding-left:10px"><b>Jumlah <?php echo "$datareport5[1]"; ?></b></td>
     <td align="right" style="padding-right:10px"><b>
       <?php
-        $potongtnr1=substr($tnr1,0,1);
-        if ($tnr1==0) {
+        $potongtnr5=substr($tnr5,0,1);
+        if ($tnr5==0) {
           echo "-";
         }else {
-          if ($potongtnr1=="-") {
-            Echo "<font style=color:red>"; echo number_format($tnr1,0,',','.'); Echo "</font>";
+          if ($potongtnr5=="-") {
+            Echo "<font style=color:red>"; echo number_format($tnr5,0,',','.'); Echo "</font>";
           }else {
-            echo number_format($tnr1,0,',','.');
+            echo number_format($tnr5,0,',','.');
           }
         }
       ?>
@@ -474,17 +481,17 @@
     <!-- end jumlah aktiva lancar -->
 
     <!-- start jumlah Kewajiban Lancar -->
-    <td style="padding-left:10px"><b>Jumlah <?php echo "$datareport2[1]"; ?></b></td>
+    <td style="padding-left:10px"><b>Jumlah <?php echo "$datareport6[1]"; ?></b></td>
     <td align="right" style="padding-right:10px"><b>
       <?php
-        $potongtnr2=substr($tnr2,0,1);
-        if ($tnr2==0) {
+        $potongtnr6=substr($tnr6,0,1);
+        if ($tnr6==0) {
           echo "-";
         }else {
-          if ($potongtnr2=="-") {
-            Echo "<font style=color:red>"; echo number_format($tnr2,0,',','.'); Echo "</font>";
+          if ($potongtnr6=="-") {
+            Echo "<font style=color:red>"; echo number_format($tnr6,0,',','.'); Echo "</font>";
           }else {
-            echo number_format($tnr2,0,',','.');
+            echo number_format($tnr6,0,',','.');
           }
         }
       ?>
@@ -495,6 +502,15 @@
   <!-- batas -->
   <tr bgcolor="whitesmoke"><td colspan="4">&nbsp;</td></tr>
   <!-- batas -->
+
+
+
+
+
+
+
+
+  
 
 
   <tr>
@@ -738,17 +754,28 @@
       ?>
     </b></td>
     <!-- end jumlah ekuitas -->
-  </tr>
 
+  <!-- batas -->
   <tr bgcolor="whitesmoke"><td colspan="4">&nbsp;</td></tr>
+  <!-- batas -->
+
+
+
+
+
+
+
+
+
 
   <tr bgcolor="#ddd">
     <!-- start total aktiva -->
-    <td width="50%"><b>Jumlah Aktiva</b></td>
+    <td width="50%"><b>TOTAL AKTIVA</b></td>
     <td align="right" style="border-top:1px solid #000; border-bottom:1px solid #000">
       <b>
         <?php
-          $ebe=$tnr1+$tnr3;
+          $ebe=$tnr1+$tnr5+$tnr3;
+          // $ebe=$tnr5;
           $potongebe=substr($ebe,0,1);
 
           if ($ebe==0) {
@@ -766,11 +793,11 @@
     <!-- end strt aktiva -->
 
     <!-- start total kewajiban -->
-    <td width="50%"><b>JUMLAH KEWAJIBAN DAN EKUITAS</b></td>
+    <td width="50%"><b>TOTAL KEWAJIBAN DAN EKUITAS</b></td>
     <td align="right" style="border-top:1px solid #000; border-bottom:1px solid #000">
       <b>
         <?php
-          $aom=$tnr2+$tnr4;
+          $aom=$tnr2+$tnr6+$tnr4;
           $potongaom=substr($aom,0,1);
 
           if ($aom==0) {

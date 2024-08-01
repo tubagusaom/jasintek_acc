@@ -44,7 +44,7 @@
           $queryreport1	=mysqli_query($koneksi,$sqlreport1);
           $datareport1  =mysqli_fetch_array($queryreport1);
         ?>
-        <th align="left" colspan="2" style="padding-left:3px; border-top: 1px solid #999; border-bottom:1px solid #999; border-left: 1px solid #999; border-right: 1px solid #999">
+        <th align="center" colspan="2" style="padding-left:3px; border-top: 1px solid #999; border-bottom:1px solid #999; border-left: 1px solid #999; border-right: 1px solid #999;background-color:#bbb">
           <?php echo "$datareport1[1]"; ?>
         </th>
         <!-- end judul aktiva lancar -->
@@ -55,7 +55,7 @@
           $queryreport2	=mysqli_query($koneksi,$sqlreport2);
           $datareport2  =mysqli_fetch_array($queryreport2);
         ?>
-        <th align="left" colspan="2" style="padding-left:3px; border-top: 1px solid #999; border-bottom:1px solid #999; border-left: 1px solid #999; border-right: 1px solid #999">
+        <th align="center" colspan="2" style="padding-left:3px; border-top: 1px solid #999; border-bottom:1px solid #999; border-left: 1px solid #999; border-right: 1px solid #999;background-color:#bbb">
           <?php echo "$datareport2[1]"; ?>
         </th>
         <!-- end judul kewajiban lancar -->
@@ -243,6 +243,279 @@
       </tr>
       <!-- batas -->
 
+
+
+
+
+
+
+
+
+
+      <tr bgcolor="whitesmoke">
+        <!-- start judul Aktiva Lain-Lain -->
+        <?php
+          $sqlreport5  	="SELECT `kd_report`, `desc_report` FROM `report` WHERE kd_report='205' AND stts_report NOT LIKE '3'";
+          $queryreport5	=mysqli_query($koneksi,$sqlreport5);
+          $datareport5  =mysqli_fetch_array($queryreport5);
+        ?>
+        <th align="center" colspan="2" style="padding-left:3px; border-top: 1px solid #999; border-bottom:1px solid #999; border-left: 1px solid #999; border-right: 1px solid #999;background-color:#bbb">
+          <?php echo "$datareport5[1]"; ?>
+        </th>
+        <!-- end judul Aktiva Lain-Lain -->
+
+        <!-- start judul ekuitas -->
+        <?php
+          $sqlreport6  	="SELECT `kd_report`, `desc_report` FROM `report` WHERE kd_report='206' AND stts_report NOT LIKE '3'";
+          $queryreport6	=mysqli_query($koneksi,$sqlreport6);
+          $datareport6  =mysqli_fetch_array($queryreport6);
+        ?>
+        <th align="center" colspan="2" style="padding-left:3px; border-top: 1px solid #999; border-bottom:1px solid #999; border-left: 1px solid #999; border-right: 1px solid #999;background-color:#bbb">
+          <?php echo "$datareport6[1]"; ?>
+        </th>
+        <!-- end judul ekuitas -->
+      </tr>
+
+      <tr>
+        <!-- start Aktiva Lain-Lain -->
+        <td colspan="2" style="padding-left:10px; padding-right:3px; border-left: 1px solid #999; border-right: 1px solid #999">
+          <table width="100%">
+            <?php
+              $tnr5=0;
+          		$sqlgroup5	  ="SELECT `kd_group`, `kd_acount`, `kd_report` FROM `report_group` WHERE stts_group NOT LIKE '3' AND kd_report = '$datareport5[0]' ORDER BY id ASC";
+          		$querygroup5	=mysqli_query($koneksi,$sqlgroup5);
+          		while($datagroup5=mysqli_fetch_array($querygroup5))
+          		{
+                $sqlacountg5	  ="SELECT `desc_acount` FROM `acount` WHERE stts_acount NOT LIKE '3' AND kd_acount = '$datagroup5[1]'";
+            		$queryacountg5	=mysqli_query($koneksi,$sqlacountg5);
+            		$dataacountg5   =mysqli_fetch_array($queryacountg5);
+
+                $sf5=0;
+                $sqlformula5	  ="SELECT `kd_acount`, `kd_group`, `jenis_formula` FROM `report_formula` WHERE `stts_formula` NOT LIKE '3' AND kd_group = '$datagroup5[0]'";
+                $queryformula5	=mysqli_query($koneksi,$sqlformula5);
+                while($dataformula5=mysqli_fetch_array($queryformula5)){
+
+                  $sqlsumformula5=
+                            "SELECT
+                              SUM(IF(`jenis_trans` = 'D',`saldo_trans`,0)) AS DEBIT5,
+                              SUM(IF(`jenis_trans` = 'K',`saldo_trans`,0)) AS KREDIT5
+                            FROM trans WHERE
+                              stts_trans NOT LIKE '3' AND
+                              kd_acount = $dataformula5[0]
+                              $acuansaldo
+                            ";
+                  $querysumformula5	=mysqli_query($koneksi,$sqlsumformula5);
+                  $datasumformula5  =mysqli_fetch_array($querysumformula5);
+
+                  if ($dataformula5[2]=='D') {
+                    $totalmutasi5=$datasumformula5['DEBIT5']-$datasumformula5['KREDIT5'];
+                  }else {
+                    $totalmutasi5=$datasumformula5['KREDIT5']-$datasumformula3['DEBIT5'];
+                  }
+                  $sf5 += $totalmutasi5;
+                }
+
+                if ($sf5==0) {
+                  echo "";
+                }else {
+          	?>
+            <tr>
+              <td style="border-bottom:1px solid #ddd"><?php echo "$dataacountg5[0]"; ?></td>
+              <td align="right" style="border-bottom:1px solid #ddd">
+                <?php
+                  $neraca5=$sf5;
+                  $tnr5 += $neraca5;
+                  $potongneraca5=substr($neraca5,0,1);
+                  if ($neraca5==0) {
+                    echo "-";
+                  }else {
+                    if ($potongneraca5=="-") {
+                      Echo "<font style=color:red>"; echo number_format($neraca5,0,',','.'); Echo "</font>";
+                    }else {
+                      echo number_format($neraca5,0,',','.');
+                    }
+                  }
+                ?>
+              </td>
+            </tr>
+            <?php }} ?>
+          </table>
+        </td>
+        <!-- end Aktiva Lain-Lain -->
+
+        <!-- start ekuitas -->
+        <td colspan="2" style="padding-left:10px; padding-right:3px; border-left: 1px solid #999; border-right: 1px solid #999">
+          <table width="100%">
+            <?php
+              $tnr6=0;
+          		$sqlgroup6	  ="SELECT `kd_group`, `kd_acount`, `kd_report` FROM `report_group` WHERE stts_group NOT LIKE '3' AND kd_report = '$datareport6[0]' ORDER BY id ASC";
+          		$querygroup6	=mysqli_query($koneksi,$sqlgroup6);
+          		while($datagroup6=mysqli_fetch_array($querygroup6))
+          		{
+                $sqlacountg6	  ="SELECT `desc_acount` FROM `acount` WHERE stts_acount NOT LIKE '3' AND kd_acount = '$datagroup6[1]'";
+            		$queryacountg6	=mysqli_query($koneksi,$sqlacountg6);
+            		$dataacountg6   =mysqli_fetch_array($queryacountg6);
+
+                $sf6=0;
+                $sqlformula6	  ="SELECT `kd_acount`, `kd_group`, `jenis_formula` FROM `report_formula` WHERE `stts_formula` NOT LIKE '3' AND kd_group = '$datagroup6[0]'";
+                $queryformula6	=mysqli_query($koneksi,$sqlformula6);
+                while($dataformula6=mysqli_fetch_array($queryformula6)){
+
+                  // start ketentuan tubagus aom
+                  $sqlreporttb  	="SELECT `kd_report`, `desc_report` FROM `report` WHERE type_report='100' AND stts_report NOT LIKE '3'";
+                  $queryreporttb	=mysqli_query($koneksi,$sqlreporttb);
+                  $datareporttb=mysqli_fetch_array($queryreporttb);
+
+                    $sqlgrouptb  	="SELECT `kd_group`, `kd_acount` FROM `report_group` WHERE kd_acount = $dataformula6[0] AND kd_report='$datareporttb[0]' AND stts_group NOT LIKE '3'";
+                    $querygrouptb	=mysqli_query($koneksi,$sqlgrouptb);
+                    $datagrouptb  =mysqli_fetch_array($querygrouptb);
+
+                    // if ($dataformula6[0]==$datagrouptb[1]) {
+                    if (isset($datagrouptb)) {
+
+                      $toforD=0;
+                      $toforK=0;
+
+                      $sqlformulatb  	="SELECT `kd_acount`, `kd_group`, `jenis_formula` FROM `report_formula` WHERE kd_group = '$datagrouptb[0]' AND stts_formula NOT LIKE '3'";
+                      $queryformulatb	=mysqli_query($koneksi,$sqlformulatb);
+                      while($dataformulatb=mysqli_fetch_array($queryformulatb)){
+                        $sqlformulastb=
+                                  "SELECT
+                                    SUM(IF(`jenis_trans` = 'D',`saldo_trans`,0)) AS TBDEBIT,
+                                    SUM(IF(`jenis_trans` = 'K',`saldo_trans`,0)) AS TBKREDIT
+                                  FROM trans WHERE
+                                    stts_trans NOT LIKE '3' AND
+                                    kd_acount = $dataformulatb[0]
+                                    $acuansaldo
+                                  ";
+                        $queryformulastb	=mysqli_query($koneksi,$sqlformulastb);
+                        $dataformulastb   =mysqli_fetch_array($queryformulastb);
+
+                        if ($dataformulatb[2]=='D') {
+                          $totalformulaD=$dataformulastb['TBDEBIT']-$dataformulastb['TBKREDIT'];
+                          $toforD += $totalformulaD;
+                        }else {
+                          $totalformulaK=$dataformulastb['TBKREDIT']-$dataformulastb['TBDEBIT'];
+                          $toforK += $totalformulaK;
+                        }
+                      }
+
+                      $hasilformulatb = $toforK-$toforD;
+                    }
+                  // end ketentuan tubagus aom
+
+                  $sqlsumformula6=
+                            "SELECT
+                              SUM(IF(`jenis_trans` = 'D',`saldo_trans`,0)) AS DEBIT6,
+                              SUM(IF(`jenis_trans` = 'K',`saldo_trans`,0)) AS KREDIT6
+                            FROM trans WHERE
+                              stts_trans NOT LIKE '3' AND
+                              kd_acount = $dataformula6[0]
+                              $acuansaldo
+                            ";
+                  $querysumformula6	=mysqli_query($koneksi,$sqlsumformula6);
+                  $datasumformula6  =mysqli_fetch_array($querysumformula6);
+
+                  if ($dataformula6[2]=='D') {
+                    if (isset($hasilformulatb)) {
+                      $totalmutasi6=$datasumformula6['DEBIT6']-$datasumformula6['KREDIT6']+$hasilformulatb;
+                    }else {
+                      $totalmutasi6=$datasumformula6['DEBIT6']-$datasumformula6['KREDIT6'];
+                    }
+                  }else {
+                    if (isset($hasilformulatb)) {
+                      $totalmutasi6=$datasumformula6['KREDIT6']-$datasumformula6['DEBIT6']+$hasilformulatb;
+                    }else {
+                      $totalmutasi6=$datasumformula6['KREDIT6']-$datasumformula6['DEBIT6'];
+                    }
+                  }
+                  $sf6 += $totalmutasi6;
+                }
+
+                if ($sf6==0) {
+                  echo "";
+                }else {
+          	?>
+            <tr>
+              <td style="border-bottom:1px solid #ddd"><?php echo "$dataacountg6[0]"; ?></td>
+              <td align="right" style="border-bottom:1px solid #ddd">
+                <?php
+                  $neraca6=$sf6;
+                  $tnr6 += $neraca6;
+                  $potongneraca6=substr($neraca6,0,1);
+                  if ($neraca6==0) {
+                    echo "-";
+                  }else {
+                    if ($potongneraca6=="-") {
+                      echo "<font style=color:red>"; echo number_format($neraca6,0,',','.'); Echo "</font>";
+                    }else {
+                      echo number_format($neraca6,0,',','.');
+                    }
+                  }
+                ?>
+              </td>
+            </tr>
+            <?php }} ?>
+          </table>
+        </td>
+        <!-- end ekuitas -->
+      </tr>
+
+      <tr bgcolor="whitesmoke">
+        <!-- start jumlah Aktiva Lain-Lain -->
+        <th align="left" style="padding-left:3px; border-top:1px solid #999; border-left:1px solid #999; border-bottom:1px solid #999">
+          Jumlah <?php echo "$datareport5[1]"; ?>
+        </th>
+        <th align="right" style="padding-right:3px; border-top:1px solid #999; border-right:1px solid #999; border-bottom:1px solid #999">
+          <?php
+            $potongtnr5=substr($tnr5,0,1);
+            if ($tnr5==0) {
+              echo "-";
+            }else {
+              if ($potongtnr5=="-") {
+                Echo "<font style=color:red>"; echo number_format($tnr5,0,',','.'); Echo "</font>";
+              }else {
+                echo number_format($tnr5,0,',','.');
+              }
+            }
+          ?>
+        </th>
+        <!-- end jumlah Aktiva Lain-Lain -->
+
+        <!-- start jumlah ekuitas -->
+        <th align="left" style="padding-left:3px; border-top:1px solid #999; border-left:1px solid #999; border-bottom:1px solid #999">
+          Jumlah <?php echo "$datareport6[1]"; ?>
+        </th>
+        <th align="right" style="padding-right:3px; border-top:1px solid #999; border-right:1px solid #999; border-bottom:1px solid #999">
+          <?php
+            $potongtnr4=substr($tnr6,0,1);
+            if ($tnr6==0) {
+              echo "-";
+            }else {
+              if ($potongtnr4=="-") {
+                Echo "<font style=color:red>"; echo number_format($tnr6,0,',','.'); Echo "</font>";
+              }else {
+                echo number_format($tnr6,0,',','.');
+              }
+            }
+          ?>
+        </th>
+        <!-- end jumlah ekuitas -->
+      </tr>
+
+      <!-- batas -->
+      <tr>
+        <td colspan="4">&nbsp;</td>
+      </tr>
+      <!-- batas -->
+
+
+
+
+
+
+
+
       <tr bgcolor="whitesmoke">
         <!-- start judul Aktiva Lain-Lain -->
         <?php
@@ -250,7 +523,7 @@
           $queryreport3	=mysqli_query($koneksi,$sqlreport3);
           $datareport3  =mysqli_fetch_array($queryreport3);
         ?>
-        <th align="left" colspan="2" style="padding-left:3px; border-top: 1px solid #999; border-bottom:1px solid #999; border-left: 1px solid #999; border-right: 1px solid #999">
+        <th align="center" colspan="2" style="padding-left:3px; border-top: 1px solid #999; border-bottom:1px solid #999; border-left: 1px solid #999; border-right: 1px solid #999;background-color:#bbb">
           <?php echo "$datareport3[1]"; ?>
         </th>
         <!-- end judul Aktiva Lain-Lain -->
@@ -261,7 +534,7 @@
           $queryreport4	=mysqli_query($koneksi,$sqlreport4);
           $datareport4  =mysqli_fetch_array($queryreport4);
         ?>
-        <th align="left" colspan="2" style="padding-left:3px; border-top: 1px solid #999; border-bottom:1px solid #999; border-left: 1px solid #999; border-right: 1px solid #999">
+        <th align="center" colspan="2" style="padding-left:3px; border-top: 1px solid #999; border-bottom:1px solid #999; border-left: 1px solid #999; border-right: 1px solid #999;background-color:#bbb">
           <?php echo "$datareport4[1]"; ?>
         </th>
         <!-- end judul ekuitas -->
@@ -500,11 +773,18 @@
       </tr>
       <!-- batas -->
 
+
+
+
+
+
+
+
       <tr bgcolor="#ddd">
-        <th align="left" style="padding-left:3px">JUMLAH AKTIVA</td>
+        <th align="left" style="padding-left:3px">TOTAL AKTIVA</td>
         <th align="right" style="padding-right:3px; border-top:2px solid #999; border-bottom:2px solid #999">
           <?php
-            $ebe=$tnr1+$tnr3;
+            $ebe=$tnr1+$tnr5+$tnr3;
             $potongebe=substr($ebe,0,1);
 
             if ($ebe==0) {
@@ -518,10 +798,10 @@
             }
           ?>
         </th>
-        <th align="left" style="padding-left:3px">JUMLAH KEWAJIBAN DAN EKUITAS</td>
+        <th align="left" style="padding-left:3px">TOTAL KEWAJIBAN DAN EKUITAS</td>
         <th align="right" style="padding-right:3px; border-top:2px solid #999; border-bottom:2px solid #999">
           <?php
-            $aom=$tnr2+$tnr4;
+            $aom=$tnr2+$tnr6+$tnr4;
             $potongaom=substr($aom,0,1);
 
             if ($aom==0) {
@@ -547,7 +827,7 @@
             $tgl=date("d");
             $bln=bulan(date("m"));
             $thn=date("Y");
-            echo "Jakarta, $tgl $bln $thn";
+            echo "Depok, $tgl $bln $thn";
           ?>
         </p>
         <p align="left">Dibuat oleh :</p>
