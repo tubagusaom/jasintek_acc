@@ -2,7 +2,7 @@
 <form action="?Proses-Tambah-Jurnal" method="post" class="form_input">
 <table id=datatable>
 	<tr>
-		<td colspan="2"><h1>Jurnal</h1></td>
+		<td colspan="2"><h1>Tambah Jurnal</h1></td>
 	</tr>
 	<tr>
 		<td>Inisial</td>
@@ -144,20 +144,36 @@
 
     <?php
       $no=1;
-			$d=0;
-			$k=0;
+	  $d=0;
+	  $k=0;
+
+	$aom=1;
+	// if(fmod($no,2)==1)
+	// 	{$number = $aom;}
+	// else
+	// 	{$number='';}
+
       $sqls	  ="SELECT `id`, `init_trans`, `saldo_trans`, `jenis_trans`, `reff_trans`, `ket_trans`, `efv_trans`, `id_schema`, `kd_acount`, `stts_trans`, `c_trans` FROM `trans_them` where id_akun='$akses' ORDER BY id ASC";
       $querys	=mysqli_query($koneksi,$sqls);
       while($datas=mysqli_fetch_array($querys)){
-
+	  
       if(fmod($no,2)==1)
         {$warna="ghostwhite";}
       else
         {$warna="whitesmoke";}
+
+		// $aom=1;
+		// $ft=$fbulana;
+		// while ($aom)
+		// {
+		  if(fmod($no,2)==1)
+			{$number = $aom++;}
+		  else
+			{$number='';}
     ?>
 
     <tr class="hover" bgcolor="<?php echo $warna ?>">
-      <td><?php echo "$no"; ?></td>
+      <td align="center"><?php echo "$number"; ?></td>
       <td><?php echo "$datas[1]"; ?></td>
       <td>
         <?php
