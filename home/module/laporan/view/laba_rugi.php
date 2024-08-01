@@ -274,7 +274,7 @@
   <tr bgcolor="#ddd">
     <td><b>Jumlah <?php echo $datareport2[1]; ?></b></td>
     <td align="right"><b>
-      <?php echo number_format($ebe1,0,',','.'); ?>
+      <?php echo number_format($ebe2,0,',','.'); ?>
     </b></td>
   </tr>
 
@@ -484,7 +484,7 @@
     <td align="right">
       <b style="border-top:1px solid #000; border-bottom:1px solid #000; padding-top:3px; padding-left:5px; padding-bottom:3px">
       <?php
-          $jumlah2=$ebe1-$ebe2;
+          $jumlah2=$jumlah1-$ebe3-$ebe4;
           echo number_format($jumlah2,0,',','.');
       ?>
       </b>
