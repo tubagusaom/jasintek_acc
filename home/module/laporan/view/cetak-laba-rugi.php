@@ -216,9 +216,7 @@
       <tr bgcolor="whitesmoke"><td colspan="2">&nbsp;</td></tr>
       <!-- batas -->
       
-      <!-- batas -->
-      <tr bgcolor="white"><td colspan="2">&nbsp;</td></tr>
-      <!-- batas -->
+      
 
 
 
@@ -423,7 +421,7 @@
 
     </table>
 
-    <div style="float:right;width:100%; font-family:sans-serif; font-size:14px; padding-top:20px">
+    <div style="float:right;width:100%; font-family:sans-serif; font-size:14px; padding-top:0px">
     	<div style="width:30%;float:left; padding-left:10%">
         <p align="left">
           <?php
@@ -438,7 +436,7 @@
         <p align="left">Dibuat oleh :</p>
     		<p align="center">&nbsp;</p>
     		<p align="center">&nbsp;</p>
-        <p align="center">&nbsp;</p>
+        <!-- <p align="center">&nbsp;</p> -->
     		<hr style="margin:0;">
     		<p align="center" style="margin-top:0; margin-bottom:0">
           Heni Wahyuni
@@ -456,7 +454,7 @@
         <p align="left">Disetujui oleh :</p>
     		<p align="center">&nbsp;</p>
         <p align="center">&nbsp;</p>
-    		<p align="center">&nbsp;</p>
+    		<!-- <p align="center">&nbsp;</p> -->
     		<hr style="margin:0;">
     		<p align="center" style="margin-top:0; margin-bottom:0">Heru Wardani</p>
         <p align="center" style="margin-top:0; margin-bottom:0">Direktur</p>
@@ -466,5 +464,5 @@
 </html>
 
 <script>
-  // window.print();
+  window.print();
 </script>
