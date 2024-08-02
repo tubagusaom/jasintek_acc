@@ -35,7 +35,7 @@
           $fbulan=$_POST['fbulan'];
           $ftahun=$_POST['ftahun'];
           $ketacount=substr($kodekirim,3,1);
-          $descacount=substr($kodekirim,4);
+          $descacount=substr($kodekirim,5);
 
           if ($fbulan=='All') {
             $acuanbt="YEAR(efv_trans)='$ftahun' AND";
@@ -127,7 +127,7 @@
 
           $saldoawal=$dsum-$ksum;
 
-					if ($akses=='default' OR $akses=='superuser' OR $akses=='akunting') {
+					if ($akses=='default' OR $akses=='superuser' OR $akses=='akunting' OR $akses=='admin') {
             if ($hitung==0) {
               echo "";
             }else {
@@ -146,6 +146,11 @@
 			<?php
 				}else{
 			?>
+
+        <!-- aom -->
+        <a href="module/laporan/view/cetak.php?kka=<?php echo $kka ?>&&descacount=<?php echo $descacount ?>&&fbulan=<?php echo $fbulan ?>&&ftahun=<?php echo $ftahun ?>&&ketacount=<?php echo $ketacount ?>&&saldoawal=<?php echo $saldoawal ?>" target="_blank">
+					<input type="button" name="cetak" value="Cetak">
+				</a>
 
 				<a href="?Data-Jurnal&&header=Laporan">
 					<input type="button" class="bback" name="back" value="Kembali">
