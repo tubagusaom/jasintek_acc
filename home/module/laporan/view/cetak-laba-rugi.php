@@ -407,7 +407,8 @@
         <td align="right" style="background:#bbb;padding-top:5px;padding-bottom:5px;padding-right:10px;">
           <b style="border-top:1px solid #000; border-bottom:1px solid #000; padding-top:3px; padding-left:5px; padding-bottom:3px">
             <?php
-              $jumlah_2=$jumlah_1-$ebe_3-$ebe_4;
+              // $jumlah_2=$ebe_4;
+              $jumlah_2=$jumlah_1-$ebe_3+$ebe_4;
               echo number_format($jumlah_2,0,',','.');
             ?>
           </b>
@@ -422,7 +423,7 @@
 
     </table>
 
-    <div style="float:right;width:100%; font-family:sans-serif; font-size:14px; padding-top:50px">
+    <div style="float:right;width:100%; font-family:sans-serif; font-size:14px; padding-top:20px">
     	<div style="width:30%;float:left; padding-left:10%">
         <p align="left">
           <?php
@@ -465,5 +466,5 @@
 </html>
 
 <script>
-  window.print();
+  // window.print();
 </script>
