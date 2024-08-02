@@ -153,7 +153,21 @@
 	// else
 	// 	{$number='';}
 
-      $sqls	  ="SELECT `id`, `init_trans`, `saldo_trans`, `jenis_trans`, `reff_trans`, `ket_trans`, `efv_trans`, `id_schema`, `kd_acount`, `stts_trans`, `c_trans` FROM `trans_them` where id_akun='$akses' ORDER BY id ASC";
+      $sqls	  ="SELECT
+	  				`id`,
+					`init_trans`,
+					`saldo_trans`,
+					`jenis_trans`,
+					`reff_trans`,
+					`ket_trans`,
+					`efv_trans`,
+					`id_schema`,
+					`kd_acount`,
+					`stts_trans`,
+					`c_trans`
+				FROM `trans_them`
+				where id_akun='$akses'
+				ORDER BY efv_trans ASC";
       $querys	=mysqli_query($koneksi,$sqls);
       while($datas=mysqli_fetch_array($querys)){
 	  
