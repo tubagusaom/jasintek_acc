@@ -199,7 +199,7 @@
 
 			<?php
 				if (isset($_POST['pencarian'])) {
-					if ($akses=='default' OR $akses=='superuser' OR $akses=='akunting') {
+					if ($akses=='default' OR $akses=='superuser' OR $akses=='admin') {
 						if ($hitung==0) {
 							echo "";
 						}else {
@@ -209,7 +209,9 @@
 					<input type="button" class="import" name="export" value="Export">
 				</a>
 
-				<?php } ?>
+				<?php
+					}
+				?>
 
 				<a href="?Data-Jurnal&&header=Jurnal">
 					<input type="button" class="bback" name="import" value="Kembali">
@@ -252,8 +254,8 @@
 		<th rowspan="2" width="5%">Inisial</th>
 		<th rowspan="2">Account</th>
 		<th rowspan="2">Kode Reff.</th>
-		<th rowspan="2">Keterangan</th>
 		<th rowspan="2" width="8%">Actual Date</th>
+		<th rowspan="2">Keterangan</th>
 		<th colspan="2">Value Rp.</th>
 	</tr>
 	<tr align="center">
@@ -288,7 +290,6 @@
 			?>
 		</td>
 		<td><?php echo "$data[4]"; ?></td>
-		<td><?php echo "$data[5]"; ?></td>
 		<td>
 			<?php
 				$a=substr($data[6],8);
@@ -298,6 +299,7 @@
 				echo "$a-$b-$c";
 			?>
 		</td>
+		<td><?php echo "$data[5]"; ?></td>
 		<td align="right" width="10%">
 			<?php
 				if ($data[3]=='D') {
