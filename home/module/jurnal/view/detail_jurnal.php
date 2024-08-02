@@ -159,7 +159,25 @@
 					$tgl2='2050-12-30';
 				}
 
-				$sql	  ="SELECT `id`, `init_trans`, `saldo_trans`, `jenis_trans`, `reff_trans`, `ket_trans`, `efv_trans`, `id_schema`, `kd_acount`, `stts_trans`, `c_trans`, `id_akun` FROM trans WHERE efv_trans BETWEEN '$tgl1' and '$tgl2' AND stts_trans NOT LIKE '3' ORDER BY id DESC";
+				$sql	  =
+					"SELECT
+						`id`,
+						`init_trans`,
+						`saldo_trans`,
+						`jenis_trans`,
+						`reff_trans`,
+						`ket_trans`,
+						`efv_trans`,
+						`id_schema`,
+						`kd_acount`,
+						`stts_trans`,
+						`c_trans`,
+						`id_akun`
+					FROM trans
+					WHERE efv_trans
+					BETWEEN '$tgl1' and '$tgl2' AND stts_trans
+					NOT LIKE '3'
+					ORDER BY efv_trans ASC";
 				$query	=mysqli_query($koneksi,$sql);
 				$hitung = mysqli_num_rows($query);
 
