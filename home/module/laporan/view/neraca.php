@@ -700,12 +700,12 @@
                     }
                   }
 
-                  $hasilformulatb_lb_2 = $$toforD_lb_2+$toforK_lb_2;
+                  $hasilformulatb_lb_2 = $toforD_lb_2+$toforK_lb_2;
                 }
               // end ketentuan ekuitas - laba bersih tubagus aom
 
               // start ketentuan laba kotor - laba bersih tubagus aom
-              // $hasilketentuantb = $toforD_lb_2;
+              // $hasilketentuantb = $hasilformulatb_lb_2;
               $hasilketentuantb = $hasilformulatb_lb_1-$toforD_lb_2+$toforK_lb_2;
               // end ketentuan laba kotor - laba bersih tubagus aom
 
