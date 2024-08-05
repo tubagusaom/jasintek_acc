@@ -574,75 +574,124 @@
                 $queryformula4	=mysqli_query($koneksi,$sqlformula4);
                 while($dataformula4=mysqli_fetch_array($queryformula4)){
 
-                  // start ketentuan tubagus aom
-                  $sqlreporttb  	="SELECT `kd_report`, `desc_report` FROM `report` WHERE type_report='100' AND stts_report NOT LIKE '3'";
-                  $queryreporttb	=mysqli_query($koneksi,$sqlreporttb);
-                  $datareporttb=mysqli_fetch_array($queryreporttb);
+                  // start ketentuan ekuitas - laba kotor tubagus aom
+                  $sqlreporttb_lb_1  	="SELECT `kd_report`, `desc_report` FROM `report` WHERE type_report='400' AND stts_report NOT LIKE '3'";
+                  $queryreporttb_lb_1	=mysqli_query($koneksi,$sqlreporttb_lb_1);
+                  $datareporttb_lb_1=mysqli_fetch_array($queryreporttb_lb_1);
 
-                    $sqlgrouptb  	="SELECT `kd_group`, `kd_acount` FROM `report_group` WHERE kd_acount = $dataformula4[0] AND kd_report='$datareporttb[0]' AND stts_group NOT LIKE '3'";
-                    $querygrouptb	=mysqli_query($koneksi,$sqlgrouptb);
-                    $datagrouptb  =mysqli_fetch_array($querygrouptb);
+                    $sqlgrouptb_lb_1  	="SELECT `kd_group`, `kd_acount` FROM `report_group` WHERE kd_acount = $dataformula4[0] AND kd_report='$datareporttb_lb_1[0]' AND stts_group NOT LIKE '3'";
+                    $querygrouptb_lb_1	=mysqli_query($koneksi,$sqlgrouptb_lb_1);
+                    $datagrouptb_lb_1  =mysqli_fetch_array($querygrouptb_lb_1);
 
                     // if ($dataformula4[0]==$datagrouptb[1]) {
-                    if (isset($datagrouptb)) {
+                    $hasilformulatb_lb_1=0;
+                    $toforD_lb_1=0;
+                    $toforK_lb_1=0;
+                    if (isset($datagrouptb_lb_1)) {
 
-                      $toforD=0;
-                      $toforK=0;
+                      
 
-                      $sqlformulatb  	="SELECT `kd_acount`, `kd_group`, `jenis_formula` FROM `report_formula` WHERE kd_group = '$datagrouptb[0]' AND stts_formula NOT LIKE '3'";
-                      $queryformulatb	=mysqli_query($koneksi,$sqlformulatb);
-                      while($dataformulatb=mysqli_fetch_array($queryformulatb)){
-                        $sqlformulastb=
+                      $sqlformulatb_lb_1  	="SELECT `kd_acount`, `kd_group`, `jenis_formula` FROM `report_formula` WHERE kd_group = '$datagrouptb_lb_1[0]' AND stts_formula NOT LIKE '3'";
+                      $queryformulatb_lb_1	=mysqli_query($koneksi,$sqlformulatb_lb_1);
+                      while($dataformulatb_lb_1=mysqli_fetch_array($queryformulatb_lb_1)){
+                        $sqlformulastb_lb_1=
                                   "SELECT
-                                    SUM(IF(`jenis_trans` = 'D',`saldo_trans`,0)) AS TBDEBIT,
-                                    SUM(IF(`jenis_trans` = 'K',`saldo_trans`,0)) AS TBKREDIT
+                                    SUM(IF(`jenis_trans` = 'D',`saldo_trans`,0)) AS TBDEBIT_lb_1,
+                                    SUM(IF(`jenis_trans` = 'K',`saldo_trans`,0)) AS TBKREDIT_lb_1
                                   FROM trans WHERE
                                     stts_trans NOT LIKE '3' AND
-                                    kd_acount = $dataformulatb[0]
+                                    kd_acount = $dataformulatb_lb_1[0]
                                     $acuansaldo
                                   ";
-                        $queryformulastb	=mysqli_query($koneksi,$sqlformulastb);
-                        $dataformulastb   =mysqli_fetch_array($queryformulastb);
+                        $queryformulastb_lb_1	=mysqli_query($koneksi,$sqlformulastb_lb_1);
+                        $dataformulastb_lb_1   =mysqli_fetch_array($queryformulastb_lb_1);
 
-                        if ($dataformulatb[2]=='D') {
-                          $totalformulaD=$dataformulastb['TBDEBIT']-$dataformulastb['TBKREDIT'];
-                          $toforD += $totalformulaD;
+                        if ($dataformulatb_lb_1[2]=='D') {
+                          $totalformulaD_lb_1=$dataformulastb_lb_1['TBDEBIT_lb_1']-$dataformulastb_lb_1['TBKREDIT_lb_1'];
+                          $toforD_lb_1 += $totalformulaD_lb_1;
                         }else {
-                          $totalformulaK=$dataformulastb['TBKREDIT']-$dataformulastb['TBDEBIT'];
-                          $toforK += $totalformulaK;
+                          $totalformulaK_lb_1=$dataformulastb_lb_1['TBKREDIT_lb_1']-$dataformulastb_lb_1['TBDEBIT_lb_1'];
+                          $toforK_lb_1 += $totalformulaK_lb_1;
                         }
                       }
 
-                      $hasilformulatb = $toforK-$toforD;
+                      $hasilformulatb_lb_1 = $toforK_lb_1+$toforD_lb_1;
                     }
-                  // end ketentuan tubagus aom
+                  // end ketentuan ekuitas - laba kotor tubagus aom
+
+                  // start ketentuan ekuitas - laba bersih tubagus aom
+                  $sqlreporttb_lb_2  	="SELECT `kd_report`, `desc_report` FROM `report` WHERE type_report='100' AND stts_report NOT LIKE '3'";
+                  $queryreporttb_lb_2	=mysqli_query($koneksi,$sqlreporttb_lb_2);
+                  $datareporttb_lb_2=mysqli_fetch_array($queryreporttb_lb_2);
+
+                    $sqlgrouptb_lb_2  	="SELECT `kd_group`, `kd_acount` FROM `report_group` WHERE kd_acount = $dataformula4[0] AND kd_report='$datareporttb_lb_2[0]' AND stts_group NOT LIKE '3'";
+                    $querygrouptb_lb_2	=mysqli_query($koneksi,$sqlgrouptb_lb_2);
+                    $datagrouptb_lb_2  =mysqli_fetch_array($querygrouptb_lb_2);
+
+                    // if ($dataformula4[0]==$datagrouptb[1]) {
+                      $toforD_lb_2=0;
+                      $toforK_lb_2=0;
+                    if (isset($datagrouptb_lb_2)) {
+
+                      $sqlformulatb_lb_2  	="SELECT `kd_acount`, `kd_group`, `jenis_formula` FROM `report_formula` WHERE kd_group = '$datagrouptb_lb_2[0]' AND stts_formula NOT LIKE '3'";
+                      $queryformulatb_lb_2	=mysqli_query($koneksi,$sqlformulatb_lb_2);
+                      while($dataformulatb_lb_2=mysqli_fetch_array($queryformulatb_lb_2)){
+                        $sqlformulastb_lb_2=
+                                  "SELECT
+                                    SUM(IF(`jenis_trans` = 'D',`saldo_trans`,0)) AS TBDEBIT_lb_2,
+                                    SUM(IF(`jenis_trans` = 'K',`saldo_trans`,0)) AS TBKREDIT_lb_2
+                                  FROM trans WHERE
+                                    stts_trans NOT LIKE '3' AND
+                                    kd_acount = $dataformulatb_lb_2[0]
+                                    $acuansaldo
+                                  ";
+                        $queryformulastb_lb_2	=mysqli_query($koneksi,$sqlformulastb_lb_2);
+                        $dataformulastb_lb_2   =mysqli_fetch_array($queryformulastb_lb_2);
+
+                        if ($dataformulatb_lb_2[2]=='D') {
+                          $totalformulaD_lb_2=$dataformulastb_lb_2['TBDEBIT_lb_2']-$dataformulastb_lb_2['TBKREDIT_lb_2'];
+                          $toforD_lb_2 += $totalformulaD_lb_2;
+                        }else {
+                          $totalformulaK_lb_2=$dataformulastb_lb_2['TBKREDIT_lb_2']-$dataformulastb_lb_2['TBDEBIT_lb_2'];
+                          $toforK_lb_2 += $totalformulaK_lb_2;
+                        }
+                      }
+
+                      $hasilformulatb_lb_2 = $toforD_lb_2+$toforK_lb_2;
+                    }
+                  // end ketentuan ekuitas - laba bersih tubagus aom
+
+                  // start ketentuan laba kotor - laba bersih tubagus aom
+                  // $hasilketentuantb = $hasilformulatb_lb_2;
+                  $hasilketentuantb = $hasilformulatb_lb_1-$toforD_lb_2+$toforK_lb_2;
+                  // end ketentuan laba kotor - laba bersih tubagus aom
 
                   $sqlsumformula4=
-                            "SELECT
-                              SUM(IF(`jenis_trans` = 'D',`saldo_trans`,0)) AS DEBIT4,
-                              SUM(IF(`jenis_trans` = 'K',`saldo_trans`,0)) AS KREDIT4
-                            FROM trans WHERE
-                              stts_trans NOT LIKE '3' AND
-                              kd_acount = $dataformula4[0]
-                              $acuansaldo
-                            ";
-                  $querysumformula4	=mysqli_query($koneksi,$sqlsumformula4);
-                  $datasumformula4  =mysqli_fetch_array($querysumformula4);
+                        "SELECT
+                          SUM(IF(`jenis_trans` = 'D',`saldo_trans`,0)) AS DEBIT4,
+                          SUM(IF(`jenis_trans` = 'K',`saldo_trans`,0)) AS KREDIT4
+                        FROM trans WHERE
+                          stts_trans NOT LIKE '3' AND
+                          kd_acount = $dataformula4[0]
+                          $acuansaldo
+                        ";
+              $querysumformula4	=mysqli_query($koneksi,$sqlsumformula4);
+              $datasumformula4  =mysqli_fetch_array($querysumformula4);
 
-                  if ($dataformula4[2]=='D') {
-                    if (isset($hasilformulatb)) {
-                      $totalmutasi4=$datasumformula4['DEBIT4']-$datasumformula4['KREDIT4']+$hasilformulatb;
-                    }else {
-                      $totalmutasi4=$datasumformula4['DEBIT4']-$datasumformula4['KREDIT4'];
-                    }
-                  }else {
-                    if (isset($hasilformulatb)) {
-                      $totalmutasi4=$datasumformula4['KREDIT4']-$datasumformula4['DEBIT4']+$hasilformulatb;
-                    }else {
-                      $totalmutasi4=$datasumformula4['KREDIT4']-$datasumformula4['DEBIT4'];
-                    }
-                  }
-                  $sf4 += $totalmutasi4;
+              if ($dataformula4[2]=='D') {
+                if (isset($hasilformulatb_lb_2)) {
+                  $totalmutasi4=$datasumformula4['DEBIT4']-$datasumformula4['KREDIT4']+$hasilketentuantb;
+                }else {
+                  $totalmutasi4=$datasumformula4['DEBIT4']-$datasumformula4['KREDIT4'];
+                }
+              }else {
+                if (isset($hasilformulatb_lb_2)) {
+                  $totalmutasi4=$datasumformula4['KREDIT4']-$datasumformula4['DEBIT4']+$hasilketentuantb;
+                }else {
+                  $totalmutasi4=$datasumformula4['KREDIT4']-$datasumformula4['DEBIT4'];
+                }
+              }
+              $sf4 += $totalmutasi4;
                 }
 
                 if ($sf4==0) {

@@ -628,10 +628,10 @@
                 $datagrouptb_lb_1  =mysqli_fetch_array($querygrouptb_lb_1);
 
                 // if ($dataformula4[0]==$datagrouptb[1]) {
-                if (isset($datagrouptb_lb_1)) {
-
+                  $hasilformulatb_lb_1=0;
                   $toforD_lb_1=0;
                   $toforK_lb_1=0;
+                if (isset($datagrouptb_lb_1)) {
 
                   $sqlformulatb_lb_1  	="SELECT `kd_acount`, `kd_group`, `jenis_formula` FROM `report_formula` WHERE kd_group = '$datagrouptb_lb_1[0]' AND stts_formula NOT LIKE '3'";
                   $queryformulatb_lb_1	=mysqli_query($koneksi,$sqlformulatb_lb_1);
@@ -671,10 +671,9 @@
                 $datagrouptb_lb_2  =mysqli_fetch_array($querygrouptb_lb_2);
 
                 // if ($dataformula4[0]==$datagrouptb[1]) {
-                if (isset($datagrouptb_lb_2)) {
-
                   $toforD_lb_2=0;
                   $toforK_lb_2=0;
+                if (isset($datagrouptb_lb_2)) {
 
                   $sqlformulatb_lb_2  	="SELECT `kd_acount`, `kd_group`, `jenis_formula` FROM `report_formula` WHERE kd_group = '$datagrouptb_lb_2[0]' AND stts_formula NOT LIKE '3'";
                   $queryformulatb_lb_2	=mysqli_query($koneksi,$sqlformulatb_lb_2);
