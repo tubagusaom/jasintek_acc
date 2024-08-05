@@ -33,8 +33,8 @@
 
                     // REVISI PERUBAHAN
                     // $acuansaldo="AND efv_trans<'$ftahun-$fbulan-31'";
-                    $acuansaldo_1="AND efv_trans='$Set_Last_Date_Num_1'";
-                    $acuansaldo_2="AND efv_trans='$Set_Last_Date_Num_2'";
+                    $acuansaldo_1="AND efv_trans=='$Set_Last_Date_Num_1'";
+                    $acuansaldo_2="AND efv_trans=='$Set_Last_Date_Num_2'";
 
                     // $aba=bulan(date($fbulan));
                     // .date("t - m - y", strtotime(1-$fbulan-$ftahun))
