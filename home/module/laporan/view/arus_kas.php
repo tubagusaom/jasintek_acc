@@ -36,8 +36,8 @@
                     $acuansaldo_1="AND efv_trans<='$Set_Last_Date_Num_1'";
                     $acuansaldo_2="AND efv_trans<='$Set_Last_Date_Num_2'";
 
-                    $acuantahun_1="AND CONCAT(YEAR(efv_trans)) = $tahun_1";
-                    $acuantahun_2="AND CONCAT(YEAR(efv_trans)) = $tahun_2";
+                    $acuantanggal_1="AND CONCAT(YEAR(efv_trans)) = $tahun_1";
+                    $acuantanggal_2="AND CONCAT(YEAR(efv_trans)) = $tahun_2";
                     
 
                     // $aba=bulan(date($fbulan));
@@ -138,7 +138,7 @@
                                 FROM trans WHERE
                                 stts_trans NOT LIKE '3' AND
                                 kd_acount = $dataformula_1[0]
-                                $acuansaldo_1
+                                $acuantanggal_1
                                 ";
                     $querysumformula_1	=mysqli_query($koneksi,$sqlsumformula_1);
                     $datasumformula_1  =mysqli_fetch_array($querysumformula_1);
@@ -164,7 +164,7 @@
                                 FROM trans WHERE
                                 stts_trans NOT LIKE '3' AND
                                 kd_acount = $dataformula_2[0]
-                                $acuansaldo_2
+                                $acuantanggal_2
                                 ";
                     $querysumformula_2	=mysqli_query($koneksi,$sqlsumformula_2);
                     $datasumformula_2  =mysqli_fetch_array($querysumformula_2);
@@ -296,7 +296,7 @@
                                 FROM trans WHERE
                                 stts_trans NOT LIKE '3' AND
                                 kd_acount = $dataformula_3[0]
-                                $acuansaldo_1
+                                $acuantanggal_1
                                 ";
                     $querysumformula_3	=mysqli_query($koneksi,$sqlsumformula_3);
                     $datasumformula_3  =mysqli_fetch_array($querysumformula_3);
@@ -322,7 +322,7 @@
                                 FROM trans WHERE
                                 stts_trans NOT LIKE '3' AND
                                 kd_acount = $dataformula_4[0]
-                                $acuansaldo_2
+                                $acuantanggal_2
                                 ";
                     $querysumformula_4	=mysqli_query($koneksi,$sqlsumformula_4);
                     $datasumformula_4  =mysqli_fetch_array($querysumformula_4);
@@ -456,7 +456,7 @@
                                 FROM trans WHERE
                                 stts_trans NOT LIKE '3' AND
                                 kd_acount = $dataformula_5[0]
-                                $acuansaldo_1
+                                $acuantanggal_1
                                 ";
                     $querysumformula_5	=mysqli_query($koneksi,$sqlsumformula_5);
                     $datasumformula_5  =mysqli_fetch_array($querysumformula_5);
@@ -482,7 +482,7 @@
                                 FROM trans WHERE
                                 stts_trans NOT LIKE '3' AND
                                 kd_acount = $dataformula_6[0]
-                                $acuansaldo_2
+                                $acuantanggal_2
                                 ";
                     $querysumformula_6	=mysqli_query($koneksi,$sqlsumformula_6);
                     $datasumformula_6  =mysqli_fetch_array($querysumformula_6);
@@ -657,7 +657,7 @@
                                 FROM trans WHERE
                                 stts_trans NOT LIKE '3' AND
                                 kd_acount = $dataformula_7[0]
-                                $acuantahun_1
+                                $acuantanggal_1
                                 ";
                     $querysumformula_7	=mysqli_query($koneksi,$sqlsumformula_7);
                     $datasumformula_7  =mysqli_fetch_array($querysumformula_7);
@@ -684,7 +684,7 @@
                                 FROM trans WHERE
                                 stts_trans NOT LIKE '3' AND
                                 kd_acount = $dataformula_8[0]
-                                $acuantahun_2
+                                $acuantanggal_2
                                 ";
                     $querysumformula_8	=mysqli_query($koneksi,$sqlsumformula_8);
                     $datasumformula_8  =mysqli_fetch_array($querysumformula_8);
