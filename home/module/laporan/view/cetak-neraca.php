@@ -253,7 +253,7 @@
 
 
       <tr bgcolor="whitesmoke">
-        <!-- start judul Aktiva Lain-Lain -->
+        <!-- start judul Aktiva Aset Tetap -->
         <?php
           $sqlreport5  	="SELECT `kd_report`, `desc_report` FROM `report` WHERE kd_report='205' AND stts_report NOT LIKE '3'";
           $queryreport5	=mysqli_query($koneksi,$sqlreport5);
@@ -262,9 +262,9 @@
         <th align="center" colspan="2" style="padding-left:3px; border-top: 1px solid #999; border-bottom:1px solid #999; border-left: 1px solid #999; border-right: 1px solid #999;background-color:#bbb">
           <?php echo "$datareport5[1]"; ?>
         </th>
-        <!-- end judul Aktiva Lain-Lain -->
+        <!-- end judul Aset Tetap -->
 
-        <!-- start judul ekuitas -->
+        <!-- start judul Kewajiban Jangka Panjang -->
         <?php
           $sqlreport6  	="SELECT `kd_report`, `desc_report` FROM `report` WHERE kd_report='206' AND stts_report NOT LIKE '3'";
           $queryreport6	=mysqli_query($koneksi,$sqlreport6);
@@ -273,12 +273,12 @@
         <th align="center" colspan="2" style="padding-left:3px; border-top: 1px solid #999; border-bottom:1px solid #999; border-left: 1px solid #999; border-right: 1px solid #999;background-color:#bbb">
           <?php echo "$datareport6[1]"; ?>
         </th>
-        <!-- end judul ekuitas -->
+        <!-- end judul Kewajiban Jangka Panjang -->
       </tr>
 
       <tr>
-        <!-- start Aktiva Lain-Lain -->
-        <td colspan="2" style="padding-left:10px; padding-right:3px; border-left: 1px solid #999; border-right: 1px solid #999">
+        <!-- start aktiva Aset Tetap -->
+        <td colspan="2" style="padding-left:10px; padding-right:3px; padding-right:3px; border-left: 1px solid #999; border-right: 1px solid #999">
           <table width="100%">
             <?php
               $tnr5=0;
@@ -310,7 +310,7 @@
                   if ($dataformula5[2]=='D') {
                     $totalmutasi5=$datasumformula5['DEBIT5']-$datasumformula5['KREDIT5'];
                   }else {
-                    $totalmutasi5=$datasumformula5['KREDIT5']-$datasumformula3['DEBIT5'];
+                    $totalmutasi5=$datasumformula5['KREDIT5']-$datasumformula5['DEBIT5'];
                   }
                   $sf5 += $totalmutasi5;
                 }
@@ -327,7 +327,7 @@
                   $tnr5 += $neraca5;
                   $potongneraca5=substr($neraca5,0,1);
                   if ($neraca5==0) {
-                    echo "-";
+                    echo "";
                   }else {
                     if ($potongneraca5=="-") {
                       Echo "<font style=color:red>"; echo number_format($neraca5,0,',','.'); Echo "</font>";
@@ -341,10 +341,10 @@
             <?php }} ?>
           </table>
         </td>
-        <!-- end Aktiva Lain-Lain -->
+        <!-- end aktiva Aset Tetap -->
 
-        <!-- start ekuitas -->
-        <td colspan="2" style="padding-left:10px; padding-right:3px; border-left: 1px solid #999; border-right: 1px solid #999">
+        <!-- start Kewajiban Jangka Panjang -->
+        <td colspan="2" style="padding-left:10px; padding-right:3px; padding-right:3px; border-left: 1px solid #999; border-right: 1px solid #999">
           <table width="100%">
             <?php
               $tnr6=0;
@@ -361,49 +361,6 @@
                 $queryformula6	=mysqli_query($koneksi,$sqlformula6);
                 while($dataformula6=mysqli_fetch_array($queryformula6)){
 
-                  // start ketentuan tubagus aom
-                  $sqlreporttb  	="SELECT `kd_report`, `desc_report` FROM `report` WHERE type_report='100' AND stts_report NOT LIKE '3'";
-                  $queryreporttb	=mysqli_query($koneksi,$sqlreporttb);
-                  $datareporttb=mysqli_fetch_array($queryreporttb);
-
-                    $sqlgrouptb  	="SELECT `kd_group`, `kd_acount` FROM `report_group` WHERE kd_acount = $dataformula6[0] AND kd_report='$datareporttb[0]' AND stts_group NOT LIKE '3'";
-                    $querygrouptb	=mysqli_query($koneksi,$sqlgrouptb);
-                    $datagrouptb  =mysqli_fetch_array($querygrouptb);
-
-                    // if ($dataformula6[0]==$datagrouptb[1]) {
-                    if (isset($datagrouptb)) {
-
-                      $toforD=0;
-                      $toforK=0;
-
-                      $sqlformulatb  	="SELECT `kd_acount`, `kd_group`, `jenis_formula` FROM `report_formula` WHERE kd_group = '$datagrouptb[0]' AND stts_formula NOT LIKE '3'";
-                      $queryformulatb	=mysqli_query($koneksi,$sqlformulatb);
-                      while($dataformulatb=mysqli_fetch_array($queryformulatb)){
-                        $sqlformulastb=
-                                  "SELECT
-                                    SUM(IF(`jenis_trans` = 'D',`saldo_trans`,0)) AS TBDEBIT,
-                                    SUM(IF(`jenis_trans` = 'K',`saldo_trans`,0)) AS TBKREDIT
-                                  FROM trans WHERE
-                                    stts_trans NOT LIKE '3' AND
-                                    kd_acount = $dataformulatb[0]
-                                    $acuansaldo
-                                  ";
-                        $queryformulastb	=mysqli_query($koneksi,$sqlformulastb);
-                        $dataformulastb   =mysqli_fetch_array($queryformulastb);
-
-                        if ($dataformulatb[2]=='D') {
-                          $totalformulaD=$dataformulastb['TBDEBIT']-$dataformulastb['TBKREDIT'];
-                          $toforD += $totalformulaD;
-                        }else {
-                          $totalformulaK=$dataformulastb['TBKREDIT']-$dataformulastb['TBDEBIT'];
-                          $toforK += $totalformulaK;
-                        }
-                      }
-
-                      $hasilformulatb = $toforK-$toforD;
-                    }
-                  // end ketentuan tubagus aom
-
                   $sqlsumformula6=
                             "SELECT
                               SUM(IF(`jenis_trans` = 'D',`saldo_trans`,0)) AS DEBIT6,
@@ -417,17 +374,9 @@
                   $datasumformula6  =mysqli_fetch_array($querysumformula6);
 
                   if ($dataformula6[2]=='D') {
-                    if (isset($hasilformulatb)) {
-                      $totalmutasi6=$datasumformula6['DEBIT6']-$datasumformula6['KREDIT6']+$hasilformulatb;
-                    }else {
-                      $totalmutasi6=$datasumformula6['DEBIT6']-$datasumformula6['KREDIT6'];
-                    }
+                    $totalmutasi6=$datasumformula6['DEBIT6']-$datasumformula6['KREDIT6'];
                   }else {
-                    if (isset($hasilformulatb)) {
-                      $totalmutasi6=$datasumformula6['KREDIT6']-$datasumformula6['DEBIT6']+$hasilformulatb;
-                    }else {
-                      $totalmutasi6=$datasumformula6['KREDIT6']-$datasumformula6['DEBIT6'];
-                    }
+                    $totalmutasi6=$datasumformula6['KREDIT6']-$datasumformula6['DEBIT6'];
                   }
                   $sf6 += $totalmutasi6;
                 }
@@ -447,7 +396,7 @@
                     echo "-";
                   }else {
                     if ($potongneraca6=="-") {
-                      echo "<font style=color:red>"; echo number_format($neraca6,0,',','.'); Echo "</font>";
+                      Echo "<font style=color:red>"; echo number_format($neraca6,0,',','.'); Echo "</font>";
                     }else {
                       echo number_format($neraca6,0,',','.');
                     }
@@ -458,15 +407,15 @@
             <?php }} ?>
           </table>
         </td>
-        <!-- end ekuitas -->
+        <!-- end Kewajiban Jangka Panjang -->
       </tr>
 
       <tr bgcolor="whitesmoke">
-        <!-- start jumlah Aktiva Lain-Lain -->
-        <th align="left" style="padding-left:3px; border-top:1px solid #999; border-left:1px solid #999; border-bottom:1px solid #999">
+        <!-- start jumlah aktiva Aset Tetap -->
+        <th align="left" style="border-top:1px solid #999; padding-left:3px; border-left:1px solid #999; border-bottom:1px solid #999">
           Jumlah <?php echo "$datareport5[1]"; ?>
         </th>
-        <th align="right" style="padding-right:3px; border-top:1px solid #999; border-right:1px solid #999; border-bottom:1px solid #999">
+        <th align="right" style="border-top:1px solid #999; padding-right:3px; border-right:1px solid #999; border-bottom:1px solid #999">
           <?php
             $potongtnr5=substr($tnr5,0,1);
             if ($tnr5==0) {
@@ -480,19 +429,19 @@
             }
           ?>
         </th>
-        <!-- end jumlah Aktiva Lain-Lain -->
+        <!-- end jumlah aktiva Aset Tetap -->
 
-        <!-- start jumlah ekuitas -->
-        <th align="left" style="padding-left:3px; border-top:1px solid #999; border-left:1px solid #999; border-bottom:1px solid #999">
+        <!-- start jumlah Kewajiban Jangka Panjang -->
+        <th align="left" style="border-top:1px solid #999; padding-left:3px; border-left:1px solid #999; border-bottom:1px solid #999">
           Jumlah <?php echo "$datareport6[1]"; ?>
         </th>
-        <th align="right" style="padding-right:3px; border-top:1px solid #999; border-right:1px solid #999; border-bottom:1px solid #999">
+        <th align="right" style="border-top:1px solid #999; padding-right:3px; border-right:1px solid #999; border-bottom:1px solid #999">
           <?php
-            $potongtnr4=substr($tnr6,0,1);
+            $potongtnr6=substr($tnr6,0,1);
             if ($tnr6==0) {
               echo "-";
             }else {
-              if ($potongtnr4=="-") {
+              if ($potongtnr6=="-") {
                 Echo "<font style=color:red>"; echo number_format($tnr6,0,',','.'); Echo "</font>";
               }else {
                 echo number_format($tnr6,0,',','.');
@@ -500,7 +449,7 @@
             }
           ?>
         </th>
-        <!-- end jumlah ekuitas -->
+        <!-- end jumlah Kewajiban Jangka Panjang -->
       </tr>
 
       <!-- batas -->
@@ -896,5 +845,5 @@
 </html>
 
 <script>
-  window.print();
+  // window.print();
 </script>

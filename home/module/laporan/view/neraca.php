@@ -309,27 +309,27 @@
 
 
   <tr>
-    <!-- start judul aktiva tetap -->
+    <!-- start judul Aset Tetap -->
     <?php
       $sqlreport5  	="SELECT `kd_report`, `desc_report` FROM `report` WHERE kd_report='205' AND stts_report NOT LIKE '3'";
       $queryreport5	=mysqli_query($koneksi,$sqlreport5);
       $datareport5  =mysqli_fetch_array($queryreport5);
     ?>
     <th colspan="2"><?php echo "$datareport5[1]"; ?></th>
-    <!-- end judul aktiva tetap -->
+    <!-- end judul Aset Tetap -->
 
-    <!-- start judul kewajiban Jangka Panjang -->
+    <!-- start judul Kewajiban Jangka Panjang -->
     <?php
       $sqlreport6  	="SELECT `kd_report`, `desc_report` FROM `report` WHERE kd_report='206' AND stts_report NOT LIKE '3'";
       $queryreport6	=mysqli_query($koneksi,$sqlreport6);
       $datareport6  =mysqli_fetch_array($queryreport6);
     ?>
     <th colspan="2"><?php echo "$datareport6[1]"; ?></th>
-    <!-- end judul kewajiban Jangka Panjang -->
+    <!-- end judul Kewajiban Jangka Panjang -->
   </tr>
 
   <tr>
-    <!-- start aktiva lancar -->
+    <!-- start Aset Tetap -->
     <td colspan="2" width="50%" style="background:#fff">
       <table style="background:#fff">
         <?php
@@ -392,9 +392,9 @@
         <?php }} ?>
       </table>
     </td>
-    <!-- end aktiva lancar -->
+    <!-- end Aset Tetap -->
 
-    <!-- start Kewajiban Lancar -->
+    <!-- start Kewajiban Jangka Panjang -->
     <td colspan="2" width="50%" style="background:#fff">
       <table style="background:#fff">
         <?php
@@ -425,9 +425,9 @@
               $datasumformula6  =mysqli_fetch_array($querysumformula6);
 
               if ($dataformula6[2]=='D') {
-                $totalmutasi6=$datasumformula6['DEBIT6']-$datasumformula2['KREDIT6'];
+                $totalmutasi6=$datasumformula6['DEBIT6']-$datasumformula6['KREDIT6'];
               }else {
-                $totalmutasi6=$datasumformula6['KREDIT6']-$datasumformula2['DEBIT6'];
+                $totalmutasi6=$datasumformula6['KREDIT6']-$datasumformula6['DEBIT6'];
               }
               $sf6 += $totalmutasi6;
             }
@@ -458,11 +458,11 @@
         <?php }} ?>
       </table>
     </td>
-    <!-- end Kewajiban Lancar -->
+    <!-- end Kewajiban Jangka Panjang -->
   </tr>
 
   <tr bgcolor="#ddd">
-    <!-- start jumlah aktiva lancar -->
+    <!-- start jumlah Aset Tetap -->
     <td style="padding-left:10px"><b>Jumlah <?php echo "$datareport5[1]"; ?></b></td>
     <td align="right" style="padding-right:10px"><b>
       <?php
@@ -478,9 +478,9 @@
         }
       ?>
     </b></td>
-    <!-- end jumlah aktiva lancar -->
+    <!-- end jumlah Aset Tetap -->
 
-    <!-- start jumlah Kewajiban Lancar -->
+    <!-- start jumlah Kewajiban Jangka Panjang -->
     <td style="padding-left:10px"><b>Jumlah <?php echo "$datareport6[1]"; ?></b></td>
     <td align="right" style="padding-right:10px"><b>
       <?php
@@ -496,7 +496,7 @@
         }
       ?>
     </b></td>
-    <!-- end jumlah Kewajiban Lancar -->
+    <!-- end jumlah Kewajiban Jangka Panjang -->
   </tr>
 
   <!-- batas -->
