@@ -54,9 +54,9 @@
 		<td colspan="6">
 			<?php if (isset($_POST['pencarian'])) { ?>
 
-                <a href="module/laporan/view/cetak-arus-kas.php?tahun=<?php echo $tahun_1 ?>" target="_blank">
+                <!-- <a href="module/laporan/view/cetak-arus-kas.php?tahun=<?php echo $tahun_1 ?>" target="_blank">
                     <input type="button" name="cetak" value="Cetak">
-                </a>
+                </a> -->
 
                 <a href="?Arus-Kas&&header=Laporan">
                     <input type="button" class="bback" name="back" value="Kembali">
