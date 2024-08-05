@@ -36,6 +36,10 @@
                     $acuansaldo_1="AND efv_trans<='$Set_Last_Date_Num_1'";
                     $acuansaldo_2="AND efv_trans<='$Set_Last_Date_Num_2'";
 
+                    $acuantahun_1="AND CONCAT(YEAR(efv_trans)) = $tahun_1";
+                    $acuantahun_2="AND CONCAT(YEAR(efv_trans)) = $tahun_2";
+                    
+
                     // $aba=bulan(date($fbulan));
                     // .date("t - m - y", strtotime(1-$fbulan-$ftahun))
                             echo "Laporan Arus Kas <b>$tahun_1 - $tahun_2</b>";
@@ -653,7 +657,7 @@
                                 FROM trans WHERE
                                 stts_trans NOT LIKE '3' AND
                                 kd_acount = $dataformula_7[0]
-                                $acuansaldo_1
+                                $acuantahun_1
                                 ";
                     $querysumformula_7	=mysqli_query($koneksi,$sqlsumformula_7);
                     $datasumformula_7  =mysqli_fetch_array($querysumformula_7);
@@ -680,7 +684,7 @@
                                 FROM trans WHERE
                                 stts_trans NOT LIKE '3' AND
                                 kd_acount = $dataformula_8[0]
-                                $acuansaldo_2
+                                $acuantahun_2
                                 ";
                     $querysumformula_8	=mysqli_query($koneksi,$sqlsumformula_8);
                     $datasumformula_8  =mysqli_fetch_array($querysumformula_8);
