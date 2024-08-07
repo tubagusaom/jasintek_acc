@@ -131,11 +131,13 @@
 
 		<th colspan="2" width="14%" style="background:<?php echo "$ebe" ?>; color:#fff">Mutasi <?php echo $blna=bulan(date("$ft")); ?></th>
 
-    <?php $aom++;$ft=$ft+1;} ?> 
+    <?php $aom++;$ft=$ft+1;} ?>
 
     <th colspan="2" width="14%" style="background:rgb(240, 181, 195)">Total Mutasi</th>
-		<th colspan="2" width="14%" style="background:rgb(224, 245, 142)">Laba Rugi <br> <?= substr($aba,0,3) . ' - ' . substr($abb,0,3) . ' ' . $ftahun; ?></th>
-    <!-- <th colspan="2" width="14%" style="background:rgb(184, 240, 181)">Neraca 31/<?=$fbulanb?>/<?php echo "$ftahun"; ?></th> -->
+		<!-- <th colspan="2" width="14%" style="background:rgb(224, 245, 142)">Laba Rugi <?php echo "$ftahun"; ?></th> -->
+    <!-- <th colspan="2" width="14%" style="background:rgb(184, 240, 181)">Neraca 31/12/<?php echo "$ftahun"; ?></th> -->
+    
+		<th colspan="2" width="14%" style="background:rgb(224, 245, 142)">Laba Rugi <br> Akhir <?= substr($abb,0,3) . ' ' . $ftahun; ?></th>
     <th colspan="2" width="14%" style="background:rgb(184, 240, 181)">Neraca <br> Akhir <?= $abb . ' ' . $ftahun; ?></th>
   </tr>
 
