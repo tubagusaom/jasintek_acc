@@ -77,7 +77,7 @@
                     kd_acount LIKE '$kodeacount%'
                     ORDER BY
                       -- DAY (efv_trans) ASC,
-                      id DESC,
+                      id ASC,
                       MONTH (efv_trans) ASC,
                       YEAR (efv_trans) ASC
 
