@@ -374,7 +374,14 @@
                 $hasilformula=$tofor+$labarugikredit;
               }
 
-            echo "<b>"; echo number_format($hasilformula,0,',','.'); echo "</b>";
+            $potonghasilformula=substr($hasilformula,0,1);
+            if ($potonghasilformula=="-") {
+              echo "<b style='color:red'>"; echo number_format($hasilformula,0,',','.'); echo "</b>";
+            }else {
+              echo "<b>"; echo number_format($hasilformula,0,',','.'); echo "</b>";
+            }
+
+            // echo "<b style='color:red'>"; echo number_format($potonghasilformula,0,',','.'); echo "</b>";
           }else {
 
           if ($dataac[2]=="D") {
@@ -435,14 +442,14 @@
       <?php
         if (isset($datagroup)) {
           if ($dataac[2]=="D") {
-            $totalneraca=$tofor+$labarugidebit;
-            if ($totalneraca==0) {
+            $totalneracad=$tofor+$labarugidebit;
+            if ($totalneracad==0) {
               echo "-";
             }else {
-              echo number_format($totalneraca,0,',','.');
+              echo number_format($totalneracad,0,',','.');
             }
           }else {
-            $totalneraca="";
+            $totalneracad="";
           }
         }
 
@@ -475,14 +482,25 @@
       <?php
         if (isset($datagroup)) {
           if ($dataac[2]=="K") {
-            $totalneraca=$tofor+$labarugikredit;
-            if ($totalneraca==0) {
-              echo "-";
+            $totalneracak=$tofor+$labarugikredit;
+            $potongtotalneracak=substr($totalneracak,0,1);
+            
+            if ($totalneracak==0) {
+              echo "";
             }else {
-              echo number_format($totalneraca,0,',','.');
+              // echo number_format($totalneraca,0,',','.');
+
+              if ($potongtotalneracak=="-") {
+                // echo "xxx.xxx";
+                Echo "<b style=color:red>"; echo number_format($totalneracak,0,',','.'); Echo "</b>";
+                // echo number_format($tofor,0,',','.');
+              }else {
+                echo number_format($totalneracak,0,',','.');
+              }
+
             }
-          }else {
-            $totalneraca="";
+          } else {
+            $totalneracak="";
           }
         }
 
@@ -492,7 +510,7 @@
             $potongnk=substr($nk,0,1);
 
             if ($nk==0) {
-              echo "-";
+              echo "";
             }else {
               if ($potongnk=="-") {
                 Echo "<font style=color:red>"; echo number_format($nk,0,',','.'); Echo "</font>";
@@ -505,7 +523,7 @@
           }else {
             echo "";
           }
-        }else {
+        } else {
           echo "";
         }
       ?>
@@ -514,6 +532,13 @@
   </tr>
 
   <?php $no++;} ?>
+
+
+
+
+
+
+  
 
   <!-- start total saldo awal -->
   <tr>

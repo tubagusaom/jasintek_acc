@@ -48,7 +48,7 @@
           if ($ketacount=='M') {
             $kodeacount=substr($kodekirim,0,1);
           }else {
-            $kodeacount=substr($kodekirim,0,3);
+            $kodeacount=substr($kodekirim,0,4);
           };
 				}else {
           $kodeacount='';
@@ -75,7 +75,12 @@
                     stts_trans NOT LIKE '3' AND
                     $acuanbt
                     kd_acount LIKE '$kodeacount%'
-                    ORDER BY id DESC
+                    ORDER BY
+                      -- DAY (efv_trans) ASC,
+                      -- MONTH (efv_trans) ASC,
+                      -- YEAR (efv_trans) ASC
+
+                      YEAR (efv_trans) ASC
                   ";
 
 				$query	=mysqli_query($koneksi,$sql);
@@ -88,7 +93,7 @@
             $abaa=bulan(date($fbulan));
           }
 
-          $kka=substr($kodekirim,0,3);
+          $kka=substr($kodekirim,0,4);
 					if ($hitung==0) {
 						echo "<font style='font-size:12px;'>Filter berdasarkan kode account <b style='text-decoration:underline; color:darkblue'>$kka</b> <br> Bulan <b style='text-decoration:underline; color:darkblue'>$abaa</b>, Tahun <b style='text-decoration:underline; color:darkblue'>$ftahun</b> Tidak ditemukan</font>";
 					}else {
@@ -112,7 +117,8 @@
                       stts_trans NOT LIKE '3' AND
                       $acuanbtsum
                       kd_acount LIKE '$kodeacount%'
-                      ORDER BY id DESC
+                      ORDER BY
+                        id DESC
                     ";
           $querysum	=mysqli_query($koneksi,$sqlsum);
           while($datasum=mysqli_fetch_array($querysum)){
@@ -152,7 +158,7 @@
 					<input type="button" name="cetak" value="Cetak">
 				</a>
 
-				<a href="?Data-Jurnal&&header=Laporan">
+				<a href="?Buku-Besar&&header=Laporan">
 					<input type="button" class="bback" name="back" value="Kembali">
 				</a>
 

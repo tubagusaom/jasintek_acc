@@ -1,12 +1,12 @@
 
 <?php
-	$env = 'online'; // lokal atau online
+	$env = 'lokal'; // lokal atau online
 
 	if($env=='lokal'){
 		$host	 		= "localhost";
 		$user	 		= "root";
 		$pass	 		= "";
-		$dabname		= "accounting_db";
+		$dabname		= "jasintek_acc_db";
 		$base			= "http://localhost/terabytee/project/jasintek/acc/";
 	}else{
 		$host	 		= "151.106.119.249";
