@@ -79,9 +79,9 @@
                       -- saldo_trans ASC,
                       -- DAY (efv_trans) ASC,
                       MONTH (efv_trans) ASC,
-                      YEAR (efv_trans) ASC
+                      YEAR (efv_trans) ASC,
 
-                      --  id DESC
+                       id DESC
                   ";
 
 				$query	=mysqli_query($koneksi,$sql);
