@@ -81,7 +81,7 @@
                       -- MONTH (efv_trans) ASC,
                       -- YEAR (efv_trans) ASC
 
-                       id ASC
+                       id DESC
                   ";
 
 				$query	=mysqli_query($koneksi,$sql);
