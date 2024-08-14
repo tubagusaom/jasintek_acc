@@ -76,11 +76,11 @@
                     $acuanbt
                     kd_acount LIKE '$kodeacount%'
                     ORDER BY
-                      -- DAY (efv_trans) ASC,
-                      -- MONTH (efv_trans) ASC,
-                      -- YEAR (efv_trans) ASC
-
+                      DAY (efv_trans) ASC,
+                      MONTH (efv_trans) ASC,
                       YEAR (efv_trans) ASC
+
+                      -- YEAR (efv_trans) ASC
                   ";
 
 				$query	=mysqli_query($koneksi,$sql);
