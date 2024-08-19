@@ -922,9 +922,9 @@
 
     <td align="right" width="7%">
       <?php
-        if (isset($datagroup_1)) {
+        if (isset($datagroup_5)) {
           if ($dataac[2]=="K") {
-            $totalneracak=$tofor_1+$labarugikredit_1;
+            $totalneracak=$hasillababersih;
             $potongtotalneracak=substr($totalneracak,0,1);
             
             if ($totalneracak==0) {
@@ -938,6 +938,7 @@
                 // echo number_format($tofor,0,',','.');
               }else {
                 echo number_format($totalneracak,0,',','.');
+                // echo "xxx.xxx";
               }
 
             }
@@ -1096,7 +1097,7 @@
     </td>
     <td align="right">
       <?php
-        $totalnplus=$tnk+$totalneraca;
+        $totalnplus=$tnk+$totalneracak;
         $potongtotalnplus=substr($totalnplus,0,1);
 
         if ($totalnplus==0) {
