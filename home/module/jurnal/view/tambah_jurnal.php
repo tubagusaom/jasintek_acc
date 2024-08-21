@@ -13,7 +13,7 @@
 		$( "#date" ).datepicker({
 			autoclose:true,
 			todayHighlight:true,
-			format:'dd-mm-yyyy',
+			format:'dd/mm/yyyy',
 			language: 'id'
 		});
 	});
@@ -46,8 +46,8 @@
 	<tr>
 		<td>Actual Date</td>
 		<td>
-			<!-- <input type="date" name="a_date" value="" placeholder="max 20 character"> -->
-			<input type="text" readonly class="form-control" id="date">
+			<input type="date" name="a_date" value="" placeholder="max 20 character">
+			<!-- <input type="text" name="a_date" readonly class="form-control" id="date"> -->
 		</td>
 	</tr>
 
