@@ -1,3 +1,33 @@
+<!-- framework bootstrap -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+<!-- datepicker bootstrap -->
+<link rel="stylesheet" href="<?=base_url()?>bootstrap-datepicker/css/bootstrap-datepicker.min.css">
+<script src="<?=base_url()?>bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+<script src="<?=base_url()?>bootstrap-datepicker/locales/bootstrap-datepicker.id.min.js"></script>
+
+<script>
+	$( function(){
+		$( "#date" ).datepicker({
+			autoclose:true,
+			todayHighlight:true,
+			format:'yyyy/mm/dd',
+			language: 'id'
+		});
+	});
+</script>
+
+<style>
+	#navi .core ul label > li.menuaktif {
+		width: 250px;
+	}
+	.alert{
+		padding:0px!important;
+	}
+</style>
+
 <form action="?Proses-Edit-Jurnal" method="post" class="form_input">
 	<table>
 		<tr>
@@ -74,7 +104,8 @@
 		<tr>
 			<td>Actual Date</td>
 			<td>
-				<input type="date" name="date" value="<?php echo $_GET['date']; ?>">
+				<!-- <input type="date" name="date" value="<?php echo $_GET['date']; ?>"> -->
+				<input type="text" name="date" readonly class="form-control" id="date" value="<?php echo $_GET['date']; ?>">
 			</td>
 		</tr>
 		<tr>
