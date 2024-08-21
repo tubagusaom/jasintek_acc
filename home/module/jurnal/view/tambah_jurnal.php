@@ -1,8 +1,38 @@
+<!-- framework bootstrap -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+
+<!-- datepicker bootstrap -->
+<link rel="stylesheet" href="<?=base_url()?>bootstrap-datepicker/css/bootstrap-datepicker.min.css">
+<script src="<?=base_url()?>bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+<script src="<?=base_url()?>bootstrap-datepicker/locales/bootstrap-datepicker.id.min.js"></script>
+
+<script>
+	$( function(){
+		$( "#date" ).datepicker({
+			autoclose:true,
+			todayHighlight:true,
+			format:'dd-mm-yyyy',
+			language: 'id'
+		});
+	});
+</script>
+
+<style>
+	#navi .core ul label > li.menuaktif {
+		width: 250px;
+	}
+	.alert{
+		padding:0px!important;
+	}
+</style>
+
 <body>
 <form action="?Proses-Tambah-Jurnal" method="post" class="form_input">
 <table id=datatable>
 	<tr>
-		<td colspan="2"><h1>Tambah Jurnal</h1></td>
+		<td colspan="2"><h1>Tambah Jurnal </h1></td>
 	</tr>
 	<tr>
 		<td>Inisial</td>
@@ -16,7 +46,8 @@
 	<tr>
 		<td>Actual Date</td>
 		<td>
-			<input type="date" name="a_date" value="" placeholder="max 20 character">
+			<!-- <input type="date" name="a_date" value="" placeholder="max 20 character"> -->
+			<input type="text" readonly class="form-control" id="date">
 		</td>
 	</tr>
 
@@ -125,7 +156,7 @@
 ?>
 
 <form action="?Posting-Jurnal" method="post">
-  <table>
+  <table class="table-bordered">
 
     <tr align="center">
       <th rowspan="2">No</th>
