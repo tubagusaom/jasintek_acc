@@ -47,9 +47,9 @@
 		<td colspan="50">
 			<?php if (isset($_POST['pencarian'])) { ?>
 
-				<a href="module/laporan/view/cetak-neraca-lajur.php?bulanawal=<?php echo $fbulana ?>&&bulanakhir=<?php echo $fbulanb ?>&&tahun=<?php echo $ftahun ?>" target="_blank">
+				<!-- <a href="module/laporan/view/cetak-neraca-lajur.php?bulanawal=<?php echo $fbulana ?>&&bulanakhir=<?php echo $fbulanb ?>&&tahun=<?php echo $ftahun ?>" target="_blank">
 					<input type="button" name="cetak" value="Cetak">
-				</a>
+				</a> -->
 
 				<a href="?Neraca-Lajur&&header=Laporan">
 					<input type="button" class="bback" name="back" value="Kembali">

@@ -257,6 +257,7 @@
 		<th rowspan="2" width="8%">Actual Date</th>
 		<th rowspan="2">Keterangan</th>
 		<th colspan="2">Value Rp.</th>
+		<th rowspan="2" width="7%">-</th>
 	</tr>
 	<tr align="center">
 		<th>D</th>
@@ -323,6 +324,10 @@
 					echo "-";
 				}
 			?>
+		</td>
+		<td align="center">
+			<a href="?Ubah-Jurnal&&header=<?php echo "Jurnal" ?>&&id=<?php echo "$data[0]" ?>&&inisial=<?php echo "$data[1]" ?>&&account=<?php echo "$data[8]" ?>&&saldo=<?php echo "$data[2]" ?>&&jenis=<?php echo "$data[3]" ?>&&reff=<?php echo "$data[4]" ?>&&ket=<?php echo "$data[5]" ?>&&date=<?php echo "$data[6]" ?>">Ubah</a>
+			<!-- <a onclick="return confirm('apakah anda yakin hapus ?')" href="?Hapus-Jurnal&&id=<?php echo "$data[0]" ?>">Hapus</a> -->
 		</td>
 	</tr>
 

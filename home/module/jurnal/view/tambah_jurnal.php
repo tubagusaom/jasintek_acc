@@ -268,7 +268,7 @@
       </td>
       <td align="center">
         <a href="?Edit-Jurnal&&header=<?php echo "Jurnal" ?>&&id=<?php echo "$datas[0]" ?>&&inisial=<?php echo "$datas[1]" ?>&&account=<?php echo "$datas[8]" ?>&&saldo=<?php echo "$datas[2]" ?>&&jenis=<?php echo "$datas[3]" ?>&&reff=<?php echo "$datas[4]" ?>&&ket=<?php echo "$datas[5]" ?>&&date=<?php echo "$datas[6]" ?>">Edit</a> |
-  			<a onclick="return confirm('apakah anda yakin hapus ?')" href="?Hapus-Jurnal&&id=<?php echo "$datas[0]" ?>">Hapus</a>
+  		<a onclick="return confirm('apakah anda yakin hapus ?')" href="?Hapus-Jurnal&&id=<?php echo "$datas[0]" ?>">Hapus</a>
       </td>
     </tr>
 
