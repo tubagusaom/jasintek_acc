@@ -111,6 +111,10 @@
 		<tr>
 			<td colspan="2">
 				<input type="submit" name="simpan" value="Simpan">
+                
+                <a href="?Data-Jurnal&&header=Jurnal">
+					<input type="button" class="bback" name="back" value="Kembali">
+				</a>
 			</td>
 		</tr>
 	</table>
