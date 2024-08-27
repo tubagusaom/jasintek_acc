@@ -1,4 +1,8 @@
 	
+	<style>
+		
+	</style>
+	
 	<ul>
 		<label for="jurnal">
 			<li <?=$this_url->check_header() == 'Jurnal' ? 'class="menuaktif"' : ''?>><i class="fa fa-pie-chart"></i>Jurnal</li>

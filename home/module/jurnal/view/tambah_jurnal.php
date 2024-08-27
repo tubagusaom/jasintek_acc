@@ -19,14 +19,7 @@
 	});
 </script>
 
-<style>
-	#navi .core ul label > li.menuaktif {
-		width: 250px;
-	}
-	.alert{
-		padding:0px!important;
-	}
-</style>
+
 
 <body>
 <form action="?Proses-Tambah-Jurnal" method="post" class="form_input">
