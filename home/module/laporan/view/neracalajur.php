@@ -47,9 +47,9 @@
 		<td colspan="50">
 			<?php if (isset($_POST['pencarian'])) { ?>
 
-				<!-- <a href="module/laporan/view/cetak-neraca-lajur.php?bulanawal=<?php echo $fbulana ?>&&bulanakhir=<?php echo $fbulanb ?>&&tahun=<?php echo $ftahun ?>" target="_blank">
+				<a href="module/laporan/view/cetak-neraca-lajur.php?bulanawal=<?php echo $fbulana ?>&&bulanakhir=<?php echo $fbulanb ?>&&tahun=<?php echo $ftahun ?>" target="_blank">
 					<input type="button" name="cetak" value="Cetak">
-				</a> -->
+				</a>
 
 				<a href="?Neraca-Lajur&&header=Laporan">
 					<input type="button" class="bback" name="back" value="Kembali">
@@ -750,9 +750,9 @@
           }else {
             $potonghasilformulaD_1=substr($toforD_1,0,1);
             if ($potonghasilformulaD_1=="-") {
-              echo "<b style='color:red'>"; echo number_format($toforD_1,0,',','.'); echo "</b>";
+              echo "<font style='color:red'>"; echo number_format($toforD_1,0,',','.'); echo "</font>";
             }else {
-              echo "<b>"; echo number_format($toforD_1,0,',','.'); echo "</b>";
+              echo "<font>"; echo number_format($toforD_1,0,',','.'); echo "</font>";
             }
           }
         }
@@ -763,9 +763,9 @@
           }else {
             $potonghasilformulaD_2=substr($toforD_2,0,1);
             if ($potonghasilformulaD_2=="-") {
-              echo "<b style='color:red'>"; echo number_format($toforD_2,0,',','.'); echo "</b>";
+              echo "<font style='color:red'>"; echo number_format($toforD_2,0,',','.'); echo "</font>";
             }else {
-              echo "<b>"; echo number_format($toforD_2,0,',','.'); echo "</b>";
+              echo "<font>"; echo number_format($toforD_2,0,',','.'); echo "</font>";
             }
           }
         }
@@ -776,9 +776,9 @@
           }else {
             $potonghasilformulaD_3=substr($toforD_3,0,1);
             if ($potonghasilformulaD_3=="-") {
-              echo "<b style='color:red'>"; echo number_format($toforD_3,0,',','.'); echo "</b>";
+              echo "<font style='color:red'>"; echo number_format($toforD_3,0,',','.'); echo "</font>";
             }else {
-              echo "<b>"; echo number_format($toforD_3,0,',','.'); echo "</b>";
+              echo "<font>"; echo number_format($toforD_3,0,',','.'); echo "</font>";
             }
           }
         }
@@ -789,9 +789,9 @@
           }else {
             $potonghasilformulaD_4=substr($toforD_4,0,1);
             if ($potonghasilformulaD_4=="-") {
-              echo "<b style='color:red'>"; echo number_format($toforD_4,0,',','.'); echo "</b>";
+              echo "<font style='color:red'>"; echo number_format($toforD_4,0,',','.'); echo "</font>";
             }else {
-              echo "<b>"; echo number_format($toforD_4,0,',','.'); echo "</b>";
+              echo "<font>"; echo number_format($toforD_4,0,',','.'); echo "</font>";
             }
           }
         }
@@ -817,7 +817,7 @@
         $sqlformula_5  	="SELECT `kd_acount`, `kd_group`, `jenis_formula` FROM `report_formula` WHERE kd_group = '$datagroup_5[0]' AND stts_formula NOT LIKE '3'";
         $queryformula_5	=mysqli_query($koneksi,$sqlformula_5);
         while($dataformula_5=mysqli_fetch_array($queryformula_5)){
-          echo number_format($hasillababersih,0,',','.');
+          echo "<b>"; echo number_format($hasillababersih,0,',','.'); echo "</b>";
         }
       ?>
       <!-- hasil laba bersih -->
@@ -829,9 +829,9 @@
           }else {
             $potonghasilformulaK_1=substr($toforK_1,0,1);
             if ($potonghasilformulaK_1=="-") {
-              echo "<b style='color:red'>"; echo number_format($toforK_1,0,',','.'); echo "</b>";
+              echo "<font style='color:red'>"; echo number_format($toforK_1,0,',','.'); echo "</font>";
             }else {
-              echo "<b>"; echo number_format($toforK_1,0,',','.'); echo "</b>";
+              echo "<font>"; echo number_format($toforK_1,0,',','.'); echo "</font>";
             }
           }
         }
@@ -842,9 +842,9 @@
           }else {
             $potonghasilformulaK_2=substr($toforK_2,0,1);
             if ($potonghasilformulaK_2=="-") {
-              echo "<b style='color:red'>"; echo number_format($toforK_2,0,',','.'); echo "</b>";
+              echo "<font style='color:red'>"; echo number_format($toforK_2,0,',','.'); echo "</font>";
             }else {
-              echo "<b>"; echo number_format($toforK_2,0,',','.'); echo "</b>";
+              echo "<font>"; echo number_format($toforK_2,0,',','.'); echo "</font>";
             }
           }
         }
@@ -855,9 +855,9 @@
           }else {
             $potonghasilformulaK_3=substr($toforK_3,0,1);
             if ($potonghasilformulaK_3=="-") {
-              echo "<b style='color:red'>"; echo number_format($toforK_3,0,',','.'); echo "</b>";
+              echo "<font style='color:red'>"; echo number_format($toforK_3,0,',','.'); echo "</font>";
             }else {
-              echo "<b>"; echo number_format($toforK_3,0,',','.'); echo "</b>";
+              echo "<font>"; echo number_format($toforK_3,0,',','.'); echo "</font>";
             }
           }
         }
@@ -868,9 +868,9 @@
           }else {
             $potonghasilformulaK_4=substr($toforK_4,0,1);
             if ($potonghasilformulaK_4=="-") {
-              echo "<b style='color:red'>"; echo number_format($toforK_4,0,',','.'); echo "</b>";
+              echo "<font style='color:red'>"; echo number_format($toforK_4,0,',','.'); echo "</font>";
             }else {
-              echo "<b>"; echo number_format($toforK_4,0,',','.'); echo "</b>";
+              echo "<font>"; echo number_format($toforK_4,0,',','.'); echo "</font>";
             }
           }
         }
@@ -937,7 +937,7 @@
                 echo "<b style=color:red>"; echo number_format($totalneracak,0,',','.'); Echo "</b>";
                 // echo number_format($tofor,0,',','.');
               }else {
-                echo number_format($totalneracak,0,',','.');
+                echo "<b>"; echo number_format($totalneracak,0,',','.'); Echo "</b>";
                 // echo "xxx.xxx";
               }
 
@@ -1070,7 +1070,7 @@
       <?php
         echo number_format($jumlahformulaD,0,',','.');
       ?>
-      </td>
+    </td>
     <td align="right">
       <?php
         $jfkhlb = $jumlahformulaK-$hasillababersih;
@@ -1097,7 +1097,7 @@
     </td>
     <td align="right">
       <?php
-        $totalnplus=$tnk+$totalneracak;
+        $totalnplus=$tnk+$hasillababersih;
         $potongtotalnplus=substr($totalnplus,0,1);
 
         if ($totalnplus==0) {
