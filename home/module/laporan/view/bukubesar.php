@@ -1,3 +1,5 @@
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
+
 <script language="JavaScript" type="text/javascript">
     function checkform ( form )
     {
@@ -19,7 +21,7 @@
 </script>
 
 <form class="" action="" method="post" onsubmit="return checkform(this);">
-<table>
+<table class="table-bordered">
 	<tr>
 		<td colspan="9"><h1>Buku Besar</h1></td>
 	</tr>

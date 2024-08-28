@@ -178,6 +178,7 @@
 					BETWEEN '$tgl1' and '$tgl2' AND stts_trans
 					NOT LIKE '3'
 					ORDER BY efv_trans ASC , ket_trans ASC";
+					
 				$query	=mysqli_query($koneksi,$sql);
 				$hitung = mysqli_num_rows($query);
 
