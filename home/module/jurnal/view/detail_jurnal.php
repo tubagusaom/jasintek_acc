@@ -9,12 +9,16 @@
 	$d=substr($akhir,8);
 	$e=substr($akhir,5,2);
 	$f=substr($akhir,0,4);
-	 include "../../../model/config/master_koneksi.php";
+	include "../../../model/config/master_koneksi.php";
+	
 
-	 header("Content-Type: application/xls");
-	 header("Content-Disposition: attachment; filename=JURNAL-tgl-$a-$b-$c-s/d-$d-$e-$f.xls");
-	 header("Pragma: no-cache");
-	 header("Expires: 0");
+	// header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+	// header("Content-Disposition: attachment; filename=JURNAL-tgl-$a-$b-$c-s/d-$d-$e-$f.xlsx");
+
+	header("Content-Type: application/xls");
+	header("Content-Disposition: attachment; filename=JURNAL-tgl-$a-$b-$c-s/d-$d-$e-$f.xls");
+	header("Pragma: no-cache");
+	header("Expires: 0");
 ?>
 
 <table border="1">
@@ -221,6 +225,10 @@
 			<?php
 				}else{
 			?>
+
+				<a onclick="return confirm('Apakah Data Transaksi Jurnal akan di EXPORT ?')" href="module/jurnal/view/detail_jurnal.php?Export-JURNAL&&tglawal=<?php echo $_POST['tgl1'] ?>&&tglakhir=<?php echo $_POST['tgl2'] ?>">
+					<input type="button" class="import" name="export" value="Export">
+				</a>
 
 				<a href="?Data-Jurnal&&header=Jurnal">
 					<input type="button" class="bback" name="import" value="Kembali">
