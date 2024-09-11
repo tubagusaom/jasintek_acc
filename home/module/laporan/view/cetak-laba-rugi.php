@@ -4,16 +4,17 @@
   include "../../../model/config/master_koneksi.php";
   $bulan=$_GET['bulan'];
   $tahun=$_GET['tahun'];
-  $Set_Last_Date=date("t - F - Y",strtotime("01-$bulan-$tahun"));
+  $Set_Last_Date=date("t F Y",strtotime("01-$bulan-$tahun"));
   $Set_Last_Date_Num=date("Y-m-t",strtotime("01-$bulan-$tahun"));
 
-  $acuansaldo="AND efv_trans<='$Set_Last_Date_Num'";
+  // $acuansaldo="AND efv_trans<='$Set_Last_Date_Num'";
+  $acuansaldo="AND efv_trans BETWEEN '$tahun-01-01' AND '$Set_Last_Date_Num'";
 ?>
 
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Laba-Rugi s/d <?php echo "$Set_Last_Date"; ?></title>
+    <title>Laba-Rugi 01 January <?=$tahun?> s/d <?php echo "$Set_Last_Date"; ?></title>
     <link href="../../../images/b_print.png" rel="icon" type="image/png" />
   </head>
 
@@ -24,7 +25,7 @@
     <div align="center" style="width:100%;font-size:15px; font-family:sans-serif; margin-bottom:0px">
       <p style="margin-top:0px;margin-bottom:5px">LAPORAN PENDAPATAN DAN BEBAN OPERASIONAL</p>
       <p style="margin-top:0px;margin-bottom:0px">
-        Untuk Periode yang Berakhir Tanggal  <?php echo $blna=$Set_Last_Date; ?>
+        Untuk Periode 01 January <?=$tahun?> s/d <?php echo $blna=$Set_Last_Date; ?>
       </p>
       <hr style="border: 1px solid">
     </div>
