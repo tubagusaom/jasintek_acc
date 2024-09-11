@@ -185,6 +185,8 @@
     $acuantrans="AND efv_trans BETWEEN '$ftahun-$fbulana-01' AND '$ftahun-$fbulanb-31'";
     $acuansaldo="AND efv_trans<'$ftahun-$fbulana-01'";
 
+    // var_dump($acuansaldo); die();
+
 
     // start formula laba bersih
 
@@ -922,6 +924,7 @@
 
     <td align="right" width="7%">
       <?php
+
         if (isset($datagroup_5)) {
           if ($dataac[2]=="K") {
             $totalneracak=$hasillababersih;
@@ -946,10 +949,14 @@
             $totalneracak="";
           }
         }
+        
+
+
 
         if ($dataac[2]=="K") {
           if ($data[1]==2) {
-            $nk=($datasaldo['KREDIT']+$totalmutasik[$no])-($datasaldo['DEBIT']+$totalmutasid[$no]);
+            // if ($dataac[0]!="3300") {
+            $nk=(($datasaldo['KREDIT']+$totalmutasik[$no])-($datasaldo['DEBIT']+$totalmutasid[$no]));
             $potongnk=substr($nk,0,1);
 
             if ($nk==0) {
@@ -963,12 +970,14 @@
             }
 
             $tnk += $nk;
+            // }
           }else {
             echo "";
           }
         } else {
           echo "";
         }
+        
       ?>
     </td>
     <!-- end neraca -->

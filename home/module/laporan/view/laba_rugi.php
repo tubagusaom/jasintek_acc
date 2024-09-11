@@ -28,17 +28,23 @@
         if (isset($_POST['pencarian'])) {
           $fbulan=$_POST['fbulan'];
           $ftahun=$_POST['ftahun'];
-          $Set_Last_Date=date("t - F - Y",strtotime("01-$fbulan-$ftahun"));
+          $Set_Last_Date=date("t F Y",strtotime("01-$fbulan-$ftahun"));
           $Set_Last_Date_Num=date("Y-m-t",strtotime("01-$fbulan-$ftahun"));
+
+          
 
           // REVISI PERUBAHAN
           //
           // $acuansaldo="AND efv_trans<'$ftahun-$fbulan-31'";
-          $acuansaldo="AND efv_trans<='$Set_Last_Date_Num'";
+          // $acuansaldo="AND efv_trans<='$Set_Last_Date_Num'";
+          $acuansaldo="AND efv_trans BETWEEN '$ftahun-01-01' AND '$Set_Last_Date_Num'";
 
           $aba=bulan(date($fbulan));
           // .date("t - m - y", strtotime(1-$fbulan-$ftahun))
-					echo "Laba-Rugi s/d <b style='text-decoration:underline'>$Set_Last_Date</b>";
+
+          // var_dump($Set_Last_Date_Num); die();
+
+					echo "Laba-Rugi <b style='text-decoration:underline'>01 January $ftahun</b> s/d <b style='text-decoration:underline'>$Set_Last_Date</b>";
 				}else {
           $acuansaldo='';
 
