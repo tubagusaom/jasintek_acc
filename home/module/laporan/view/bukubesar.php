@@ -228,7 +228,7 @@
 						$sqlx	  ="SELECT `kd_acount`, `desc_acount`, `jenis_acount`, `type_acount` FROM acount WHERE stts_acount NOT LIKE '3' ORDER BY kd_acount ASC";
 						$queryx	=mysqli_query($koneksi,$sqlx);
 						while($datax=mysqli_fetch_array($queryx)){
-							if(fmod($datax['type_acount'], 2)==M){
+							if(fmod($datax['type_acount'], 2)=='M'){
 								$font='0';
 							}else{
 								$font='700';
