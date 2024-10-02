@@ -19,6 +19,20 @@
     }
 </script>
 
+<style>
+	.export-excel {
+		background-color: #1d6d43;
+		color: #fff;
+		font-size: 13px;
+		height: 27px;
+		border: 1px solid #144e30;
+		margin-right: 5px;
+		border-radius: 4px;
+		float: right;
+		cursor: pointer;
+	}
+</style>
+
 <form class="" action="" method="post" onsubmit="return checkform(this);">
 <table class="table-bordered">
 	<tr>
@@ -157,13 +171,21 @@
 			?>
 
         <!-- aom -->
-        <a href="module/laporan/view/cetak.php?kka=<?php echo $kka ?>&&descacount=<?php echo $descacount ?>&&fbulan=<?php echo $fbulan ?>&&ftahun=<?php echo $ftahun ?>&&ketacount=<?php echo $ketacount ?>&&saldoawal=<?php echo $saldoawal ?>" target="_blank">
-					<input type="button" name="cetak" value="Cetak">
+
+        <a onclick="return confirm('EXPORT Buku Besar ?')"
+					href="module/laporan/view/export_buku_besar.php?Export-Buku-Besar&&kka=<?php echo $kka ?>&&descacount=<?php echo $descacount ?>&&fbulan=<?php echo $fbulan ?>&&ftahun=<?php echo $ftahun ?>&&ketacount=<?php echo $ketacount ?>&&saldoawal=<?php echo $saldoawal ?>">
+					<button type="button" class="export-excel" name="export">
+            Export <i class="fa fa-file-excel-o"></i>
+          </button>
 				</a>
 
-				<a href="?Buku-Besar&&header=Laporan">
-					<input type="button" class="bback" name="back" value="Kembali">
-				</a>
+        <a href="module/laporan/view/cetak.php?kka=<?php echo $kka ?>&&descacount=<?php echo $descacount ?>&&fbulan=<?php echo $fbulan ?>&&ftahun=<?php echo $ftahun ?>&&ketacount=<?php echo $ketacount ?>&&saldoawal=<?php echo $saldoawal ?>" target="_blank">
+          <input type="button" name="cetak" value="Cetak">
+        </a>
+
+        <a href="?Buku-Besar&&header=Laporan">
+          <input type="button" class="bback" name="back" value="Kembali">
+        </a>
 
 			<?php
 				}}else {
