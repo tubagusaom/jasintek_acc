@@ -242,13 +242,13 @@
 
 			
 
+				<a href="?Data-Jurnal&&header=Jurnal">
+					<input type="button" class="bback" name="import" value="Kembali">
+				</a>
+
 				<a onclick="return confirm('Apakah Data Transaksi Jurnal akan di EXPORT ?')" href="module/jurnal/view/detail_jurnal.php?Export-JURNAL&&tglawal=<?php echo $_POST['tgl1'] ?>&&tglakhir=<?php echo $_POST['tgl2'] ?>">
 					<!-- <input type="button" class="import" name="export" value="Export Excel"> <i class="fa fa-home"></i> -->
 					<button type="button" class="export-excel" name="export">Export <i class="fa fa-file-excel-o"></i></button>
-				</a>
-
-				<a href="?Data-Jurnal&&header=Jurnal">
-					<input type="button" class="bback" name="import" value="Kembali">
 				</a>
 
 			<?php
