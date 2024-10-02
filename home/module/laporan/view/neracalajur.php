@@ -18,6 +18,20 @@
     }
 </script>
 
+<style>
+	.export-excel {
+		background-color: #1d6d43;
+		color: #fff;
+		font-size: 13px;
+		height: 27px;
+		border: 1px solid #144e30;
+		margin-right: 5px;
+		border-radius: 4px;
+		float: right;
+		cursor: pointer;
+	}
+</style>
+
 <form class="" action="" method="post" onsubmit="return checkform(this);">
 <table>
 	<tr>
@@ -47,12 +61,17 @@
 		<td colspan="50">
 			<?php if (isset($_POST['pencarian'])) { ?>
 
-				<a href="module/laporan/view/cetak-neraca-lajur.php?bulanawal=<?php echo $fbulana ?>&&bulanakhir=<?php echo $fbulanb ?>&&tahun=<?php echo $ftahun ?>" target="_blank">
+				<!-- <a href="module/laporan/view/cetak-neraca-lajur.php?bulanawal=<?php echo $fbulana ?>&&bulanakhir=<?php echo $fbulanb ?>&&tahun=<?php echo $ftahun ?>" target="_blank">
 					<input type="button" name="cetak" value="Cetak">
-				</a>
+				</a> -->
 
 				<a href="?Neraca-Lajur&&header=Laporan">
 					<input type="button" class="bback" name="back" value="Kembali">
+				</a>
+
+        <a target="_blank" onclick="return confirm('Export Excel Data Neraca Lajur ?')" href="module/laporan/view/export_neraca_lajur.php?Export-Neraca-Lajur&&blnawal=<?php echo $fbulana ?>&&blnakhir=<?php echo $fbulanb ?>&&thnlajur=<?php echo $ftahun ?>">
+					<!-- <input type="button" class="import" name="export" value="Export Excel"> <i class="fa fa-home"></i> -->
+					<button type="button" class="export-excel" name="export">Export <i class="fa fa-file-excel-o"></i></button>
 				</a>
 
 			<?php }else { ?>
