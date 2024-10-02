@@ -1,3 +1,17 @@
+<style>
+				.export-excel{
+					background-color: #1d6d43;
+					color: #fff;
+					font-size: 13px;
+					height: 27px;
+					border: 1px solid #144e30;
+					margin-right: 5px;
+					border-radius: 4px;
+					float: right;
+					cursor: pointer;
+				}
+			</style>
+
 <?php
 	if (isset($_GET['Export-JURNAL'])) {
 
@@ -211,7 +225,7 @@
 			?>
 
 				<a onclick="return confirm('Apakah Data Transaksi Jurnal akan di EXPORT ?')" href="module/jurnal/view/detail_jurnal.php?Export-JURNAL&&tglawal=<?php echo $_POST['tgl1'] ?>&&tglakhir=<?php echo $_POST['tgl2'] ?>">
-					<input type="button" class="import" name="export" value="Export">
+					<input type="button" class="export-excel" name="export" value="Export Excel"> <i class="fa fa-home"></i>
 				</a>
 
 				<?php
@@ -226,8 +240,11 @@
 				}else{
 			?>
 
+			
+
 				<a onclick="return confirm('Apakah Data Transaksi Jurnal akan di EXPORT ?')" href="module/jurnal/view/detail_jurnal.php?Export-JURNAL&&tglawal=<?php echo $_POST['tgl1'] ?>&&tglakhir=<?php echo $_POST['tgl2'] ?>">
-					<input type="button" class="import" name="export" value="Export">
+					<!-- <input type="button" class="import" name="export" value="Export Excel"> <i class="fa fa-home"></i> -->
+					<button type="button" class="export-excel" name="export">Export <i class="fa fa-file-excel-o"></i></button>
 				</a>
 
 				<a href="?Data-Jurnal&&header=Jurnal">
