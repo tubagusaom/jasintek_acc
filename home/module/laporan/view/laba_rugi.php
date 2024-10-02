@@ -14,6 +14,20 @@
     }
 </script>
 
+<style>
+	.export-excel {
+		background-color: #1d6d43;
+		color: #fff;
+		font-size: 13px;
+		height: 27px;
+		border: 1px solid #144e30;
+		margin-right: 5px;
+		border-radius: 4px;
+		float: right;
+		cursor: pointer;
+	}
+</style>
+
 <form class="" action="" method="post" onsubmit="return checkform(this);">
 <table>
 	<tr>
@@ -55,6 +69,13 @@
 
 		<td colspan="6">
 			<?php if (isset($_POST['pencarian'])) { ?>
+
+        <a onclick="return confirm('EXPORT Laba-Rugi ?')"
+					href="module/laporan/view/export_laba_rugi.php?Export-Laba-Rugi&&bulan=<?php echo $fbulan ?>&&tahun=<?php echo $ftahun ?>">
+					<button type="button" class="export-excel" name="export">
+            Export <i class="fa fa-file-excel-o"></i>
+          </button>
+				</a>
 
         <a href="module/laporan/view/cetak-laba-rugi.php?bulan=<?php echo $fbulan ?>&&tahun=<?php echo $ftahun ?>" target="_blank">
 					<input type="button" name="cetak" value="Cetak">

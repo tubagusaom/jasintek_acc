@@ -1,124 +1,58 @@
-<script language="JavaScript" type="text/javascript">
-    function checkform ( form )
-    {
-	    if (form.ftahun.value == "") {
-            alert( "Pilih Tahun.!!" );
-            form.ftahun.focus();
-            return false ;
-        }
-        return true ;
-    }
-</script>
+<?php
+	if (isset($_GET['Export-Arus-Kas'])) {
 
-<style>
-	.export-excel {
-		background-color: #1d6d43;
-		color: #fff;
-		font-size: 13px;
-		height: 27px;
-		border: 1px solid #144e30;
-		margin-right: 5px;
-		border-radius: 4px;
-		float: right;
-		cursor: pointer;
-	}
-</style>
+        include "../../../model/config/master_koneksi.php";
+        include '../../../model/modul/casedate.php';
 
-<form class="" action="" method="post" onsubmit="return checkform(this);">
-<table>
-	<tr>
-		<td colspan="9"><h1>Arus Kas</h1></td>
-	</tr>
+        $tahun_1=$_GET['tahun'];
+    $tahun_2=$tahun_1-1;
 
-	<tr>
-		<td colspan="3">
-			<?php
-                // include 'model/modul/casedate.php';
+    $Set_Last_Date_1=date("t - F - Y",strtotime("31-12-$tahun_1"));
+    $Set_Last_Date_Num_1=date("Y-m-t",strtotime("31-12-$tahun_1"));
 
-                if (isset($_POST['pencarian'])) {
-                    $tahun_1=$_POST['ftahun'];
-                    $tahun_2=$tahun_1-1;
+    $Set_Last_Date_2=date("t - F - Y",strtotime("31-12-$tahun_2"));
+    $Set_Last_Date_Num_2=date("Y-m-t",strtotime("31-12-$tahun_2"));
 
-                    $Set_Last_Date_1=date("t - F - Y",strtotime("31-12-$tahun_1"));
-                    $Set_Last_Date_Num_1=date("Y-m-t",strtotime("31-12-$tahun_1"));
+    $acuansaldo_1="AND efv_trans<='$Set_Last_Date_Num_1'";
+    $acuansaldo_2="AND efv_trans<='$Set_Last_Date_Num_2'";
 
-                    $Set_Last_Date_2=date("t - F - Y",strtotime("31-12-$tahun_2"));
-                    $Set_Last_Date_Num_2=date("Y-m-t",strtotime("31-12-$tahun_2"));
+    $acuantanggal_1="AND CONCAT(YEAR(efv_trans)) = $tahun_1";
+    $acuantanggal_2="AND CONCAT(YEAR(efv_trans)) = $tahun_2";
 
-                    // REVISI PERUBAHAN
-                    // $acuansaldo="AND efv_trans<'$ftahun-$fbulan-31'";
-                    $acuansaldo_1="AND efv_trans<='$Set_Last_Date_Num_1'";
-                    $acuansaldo_2="AND efv_trans<='$Set_Last_Date_Num_2'";
+    $name_file = "Arus Kas $tahun_1 - $tahun_2";
 
-                    $acuantanggal_1="AND CONCAT(YEAR(efv_trans)) = $tahun_1";
-                    $acuantanggal_2="AND CONCAT(YEAR(efv_trans)) = $tahun_2";
-                    
+	header("Content-Type: application/xls");
+	header("Content-Disposition: attachment; filename=$name_file.xls");
+	header("Pragma: no-cache");
+	header("Expires: 0");
+?>
 
-                    // $aba=bulan(date($fbulan));
-                    // .date("t - m - y", strtotime(1-$fbulan-$ftahun))
-                            echo "Laporan Arus Kas <b>$tahun_1 - $tahun_2</b>";
-                }else {
-                    $acuansaldo_1='';
-                    $acuansaldo_2='';
-                    echo "<b>Pilih Tahun :</b>";
-                }
-			?>
-		</td>
+<table width="100%" align="center" style="font-family:sans-serif; font-size:14px">
 
-		<td colspan="6">
-			<?php if (isset($_POST['pencarian'])) { ?>
+<tr align="center">
+    <td colspan="4" style="padding-top:10px;padding-bottom:40px;">
+    <div align="center" style="width:100%;font-size:18px; font-family:sans-serif">
+      <p style="margin-bottom:5px">PT JASINTEK KARYA ABADI</p>
+    </div>
+    <div align="center" style="width:100%;font-size:18px; font-family:sans-serif; margin-bottom:0px">
+      <p style="margin-top:0px;margin-bottom:5px">LAPORAN ARUS KAS</p>
+      <p style="margin-top:0px;margin-bottom:0px">
+        <?=$tahun_1?> - <?=$tahun_2?>
+      </p>
+      <hr style="border: 1px solid">
+    </div>
+    </td>
+</tr>
 
-                <a onclick="return confirm('EXPORT Arus Kas ?')"
-					href="module/laporan/view/export_arus_kas.php?Export-Arus-Kas&&tahun=<?php echo $tahun_1 ?>">
-					<button type="button" class="export-excel" name="export">
-                        Export <i class="fa fa-file-excel-o"></i>
-                    </button>
-				</a>
-
-                <a href="module/laporan/view/cetak-arus-kas.php?tahun=<?php echo $tahun_1 ?>" target="_blank">
-                    <input type="button" name="cetak" value="Cetak">
-                </a>
-
-                <a href="?Arus-Kas&&header=Laporan">
-                    <input type="button" class="bback" name="back" value="Kembali">
-                </a>
-
-			<?php }else { ?>
-
-				<button type="submit" name="pencarian" class="cari">
-					<i class="fa fa-search"></i>
-				</button>
-
-                <select class="acount" name="ftahun">
-                    <option value="" style="color:darkblue; font-weight:700">Tahun</option>
-                        <?php
-                            $ft=thn_awal();
-                            while ($ft<=thn_akhir()) {
-                                echo"<option value='$ft'> $ft </option>";
-                                $ft=$ft+1;
-                            }
-                        ?>
-                </select>
-
-            <?php } ?>
-		</td>
-	</tr>
-</table>
-</form>
-
-
-<?php if (isset($_POST['pencarian'])) { ?>
-
-    <table>
-        <tr>
-            <td align="left" width="30%">
+        <tr style="">
+            <td align="left" width="30%" style="background:#ddd;padding:7px;">
                 LAPORAN ARUS KAS (LANGSUNG) <br>
                 Untuk Tahun-tahun yang Berakhir <br>
                 Pada Tanggal 31 Desember <?=$tahun_1?> dan <?=$tahun_2?>
             </td>
-            <th align="center"><?=$tahun_1?></th>
-            <th align="center"><?=$tahun_2?></th>
-            <td align="right" width="30%">
+            <th align="center" style="background:#ccc;padding:7px;font-size:13px;"><?=$tahun_1?></th>
+            <th align="center" style="background:#ccc;padding:7px;font-size:13px;"><?=$tahun_2?></th>
+            <td align="right" width="30%" style="background:#ddd;padding:7px;">
                 STATEMENTS OF CASH FLOWS (DIRECT) <br>
                 For the Years Ended <br>
                 December 31, <?=$tahun_1?> and <?=$tahun_2?>
@@ -126,14 +60,16 @@
         </tr>
     </table>
 
-    <table style="margin-top:15px">
-        <tr>
-            <td colspan="2" align="left" width="50%" style="font-weight:bold;">ARUS KAS DARI AKTIVITAS OPERASI</td>
-            <td colspan="2" align="right" width="50%" style="font-weight:bold;">CASH FLOWS FROM OPERATING ACTIVITIES</td>
-        </tr>
-            <!-- start ARUS KAS DARI AKTIVITAS OPERASI -->
+    <table width="100%" align="center" style="margin-top:10px;font-family:sans-serif; font-size:14px">
+      <tr>
+        <td colspan="2" align="left" width="50%" style="background:#ddd;padding:7px;font-weight:bold;">ARUS KAS DARI AKTIVITAS OPERASI</td>
+        <td colspan="2" align="right" width="50%" style="background:#ddd;padding:7px;font-weight:bold;">CASH FLOWS FROM OPERATING ACTIVITIES</td>
+      </tr>
+
+      <!-- start ARUS KAS DARI AKTIVITAS OPERASI -->
             <?php
                 $tak_1=0;
+                $tak_2=0;
 
                 $sqlreport_1  	="SELECT `kd_report`, `desc_report` FROM `report` WHERE kd_report='701' AND stts_report NOT LIKE '3'";
                 $queryreport_1	=mysqli_query($koneksi,$sqlreport_1);
@@ -141,8 +77,8 @@
 
                 $sqlgroup_1	  ="SELECT `kd_group`, `kd_acount`, `kd_report` FROM `report_group` WHERE stts_group NOT LIKE '3' AND kd_report = '$datareport_1[0]' ORDER BY id ASC";
                 $querygroup_1	=mysqli_query($koneksi,$sqlgroup_1);
-                while($datagroup_1=mysqli_fetch_array($querygroup_1))
-                {
+                while($datagroup_1=mysqli_fetch_array($querygroup_1)) {
+
                     $sqlacountg_1	  ="SELECT `kd_acount`, `desc_acount` FROM `acount` WHERE stts_acount NOT LIKE '3' AND kd_acount = '$datagroup_1[1]'";
                     $queryacountg_1	=mysqli_query($koneksi,$sqlacountg_1);
                     $dataacountg_1   =mysqli_fetch_array($queryacountg_1);
@@ -154,12 +90,12 @@
 
                     $sqlsumformula_1=
                                 "SELECT
-                                SUM(IF(`jenis_trans` = 'D',`saldo_trans`,0)) AS DEBIT_1,
-                                SUM(IF(`jenis_trans` = 'K',`saldo_trans`,0)) AS KREDIT_1
-                                FROM trans WHERE
-                                stts_trans NOT LIKE '3' AND
-                                kd_acount = $dataformula_1[0]
-                                $acuantanggal_1
+                                  SUM(IF(`jenis_trans` = 'D',`saldo_trans`,0)) AS DEBIT_1,
+                                  SUM(IF(`jenis_trans` = 'K',`saldo_trans`,0)) AS KREDIT_1
+                                  FROM trans WHERE
+                                  stts_trans NOT LIKE '3' AND
+                                  kd_acount = $dataformula_1[0]
+                                  $acuantanggal_1
                                 ";
                     $querysumformula_1	=mysqli_query($koneksi,$sqlsumformula_1);
                     $datasumformula_1  =mysqli_fetch_array($querysumformula_1);
@@ -180,30 +116,29 @@
 
                     $sqlsumformula_2=
                                 "SELECT
-                                SUM(IF(`jenis_trans` = 'D',`saldo_trans`,0)) AS DEBIT_2,
-                                SUM(IF(`jenis_trans` = 'K',`saldo_trans`,0)) AS KREDIT_2
-                                FROM trans WHERE
-                                stts_trans NOT LIKE '3' AND
-                                kd_acount = $dataformula_2[0]
-                                $acuantanggal_2
+                                  SUM(IF(`jenis_trans` = 'D',`saldo_trans`,0)),
+                                  SUM(IF(`jenis_trans` = 'K',`saldo_trans`,0))
+                                  FROM trans WHERE
+                                  stts_trans NOT LIKE '3' AND
+                                  kd_acount = $dataformula_2[0]
+                                  $acuantanggal_2
                                 ";
                     $querysumformula_2	=mysqli_query($koneksi,$sqlsumformula_2);
                     $datasumformula_2  =mysqli_fetch_array($querysumformula_2);
 
                     if ($dataformula_2[2]=='D') {
-                        $totalmutasi_2=$datasumformula_2['DEBIT_2']-$datasumformula_2['KREDIT_2'];
+                        $totalmutasi_2=$datasumformula_2[0]-$datasumformula_2[1];
                     }else {
-                        $totalmutasi_2=$datasumformula_2['KREDIT_2']-$datasumformula_1['DEBIT_2'];
+                        $totalmutasi_2=$datasumformula_2[1]-$datasumformula_1[0];
                     }
                     $sf_2 += $totalmutasi_2;
 
                 }
             ?>
-            
 
-        <tr bgcolor="whitesmoke">
-            <td align="left" width="30%"><?=$dataacountg_1[0]?> - <?php echo "$dataacountg_1[1]"; ?></td>
-            <td align="right">
+          <tr bgcolor="whitesmoke">
+            <td align="left" width="30%" style="padding:3px;"><?=$dataacountg_1[0]?> - <?php echo "$dataacountg_1[1]"; ?></td>
+            <td align="right" style="padding:3px;">
                 <?php
                     if ($sf_1==0) {
                         echo "-";
@@ -220,7 +155,7 @@
                     }
                 ?>
             </td>
-            <td align="right">
+            <td align="right" style="padding:3px;">
                 <?php
                     if ($sf_2==0) {
                         echo "-";
@@ -237,7 +172,7 @@
                     }
                 ?>
             </td>
-            <td align="right" width="30%"><?=$dataacountg_1[1]?> - <?php echo "$dataacountg_1[0]"; ?></td>
+            <td align="right" width="30%" style="padding:3px;"><?=$dataacountg_1[1]?> - <?php echo "$dataacountg_1[0]"; ?></td>
         </tr>
 
         <?php } ?>
@@ -245,8 +180,8 @@
         <!-- batas -->
 
         <tr>
-            <td align="left" style="font-weight:bold;">Jumlah Arus Kas Bersih Aktivitas Operasi</td>
-            <td align="right" style="font-weight:bold;">
+            <td align="left" style="font-weight:bold;background:#ddd;padding:7px;">Jumlah Arus Kas Bersih Aktivitas Operasi</td>
+            <td align="right" style="font-weight:bold;background:#ddd;padding:7px;">
                 <?php
                     $potongtak_1=substr($tak_1,0,1);
                     if ($tak_1==0) {
@@ -260,7 +195,7 @@
                     }
                 ?>
             </td>
-            <td align="right" style="font-weight:bold;">
+            <td align="right" style="font-weight:bold;background:#ddd;padding:7px;">
             <?php
                     $potongtak_2=substr($tak_2,0,1);
                     if ($tak_2==0) {
@@ -274,7 +209,7 @@
                     }
                 ?>
             </td>
-            <td align="right" style="font-weight:bold;">Total Net Cash Flow from Operating Activities</td>
+            <td align="right" style="font-weight:bold;background:#ddd;padding:7px;">Total Net Cash Flow from Operating Activities</td>
         </tr>
 
         <!-- end ARUS KAS DARI AKTIVITAS OPERASI -->
@@ -283,15 +218,18 @@
 
 
 
-    <table style="margin-top:20px">
+
+
+    <table width="100%" align="center" style="margin-top:10px;font-family:sans-serif; font-size:14px">
         <!-- start ARUS KAS DARI AKTIVITAS INVESTASI -->
         <tr>
-            <td colspan="2" align="left" width="50%" style="font-weight:bold;">ARUS KAS DARI AKTIVITAS INVESTASI</td>
-            <td colspan="2" align="right" width="50%" style="font-weight:bold;">CASH FLOWS FROM INVESTING ACTIVITIES</td>
+            <td colspan="2" align="left" width="50%" style="background:#ddd;padding:7px;font-weight:bold;">ARUS KAS DARI AKTIVITAS INVESTASI</td>
+            <td colspan="2" align="right" width="50%" style="background:#ddd;padding:7px;font-weight:bold;">CASH FLOWS FROM INVESTING ACTIVITIES</td>
         </tr>
 
         <?php
                 $tak_3=0;
+                $tak_4=0;
 
                 $sqlreport_3  	="SELECT `kd_report`, `desc_report` FROM `report` WHERE kd_report='702' AND stts_report NOT LIKE '3'";
                 $queryreport_3	=mysqli_query($koneksi,$sqlreport_3);
@@ -360,8 +298,8 @@
             
 
         <tr bgcolor="whitesmoke">
-            <td align="left" width="30%"><?php echo "$dataacountg_3[0]"; ?> - <?php echo "$dataacountg_3[1]"; ?></td>
-            <td align="right">
+            <td align="left" width="30%" style="padding:3px;"><?php echo "$dataacountg_3[0]"; ?> - <?php echo "$dataacountg_3[1]"; ?></td>
+            <td align="right" style="padding:3px;">
                 <?php
                     if ($sf_3==0) {
                         echo "-";
@@ -378,7 +316,7 @@
                     }
                 ?>
             </td>
-            <td align="right">
+            <td align="right" style="padding:3px;">
                 <?php
                     if ($sf_4==0) {
                         echo "-";
@@ -395,7 +333,7 @@
                     }
                 ?>
             </td>
-            <td align="right" width="30%"><?php echo "$dataacountg_3[1]"; ?> - <?php echo "$dataacountg_3[0]"; ?></td>
+            <td align="right" width="30%" style="padding:3px;"><?php echo "$dataacountg_3[1]"; ?> - <?php echo "$dataacountg_3[0]"; ?></td>
         </tr>
 
         <?php } ?>
@@ -403,8 +341,8 @@
         <!-- batas -->
 
         <tr>
-            <td align="left" style="font-weight:bold;">Jumlah Arus Kas Bersih Aktivitas Investasi</td>
-            <td align="right" style="font-weight:bold;">
+            <td align="left" style="background:#ddd;padding:7px;font-weight:bold;">Jumlah Arus Kas Bersih Aktivitas Investasi</td>
+            <td align="right" style="background:#ddd;padding:7px;font-weight:bold;">
                 <?php
                     $potongtak_3=substr($tak_3,0,1);
                     if ($tak_3==0) {
@@ -418,7 +356,7 @@
                     }
                 ?>
             </td>
-            <td align="right" style="font-weight:bold;">
+            <td align="right" style="background:#ddd;padding:7px;font-weight:bold;">
             <?php
                     $potongtak_4=substr($tak_4,0,1);
                     if ($tak_4==0) {
@@ -432,26 +370,27 @@
                     }
                 ?>
             </td>
-            <td align="right" style="font-weight:bold;">Total Net Cash Flow from Investing Activities</td>
+            <td align="right" style="background:#ddd;padding:7px;font-weight:bold;">Total Net Cash Flow from Investing Activities</td>
         </tr>
         <!-- end ARUS KAS DARI AKTIVITAS INVESTASI -->
     </table>
 
-        
 
 
 
 
 
-    <table style="margin-top:20px">
+    
+    <table width="100%" align="center" style="margin-top:10px;font-family:sans-serif; font-size:14px">
         <!-- start ARUS KAS DARI AKTIVITAS PENDANAAN -->
         <tr>
-            <td colspan="2" align="left" width="50%" style="font-weight:bold;">ARUS KAS DARI AKTIVITAS PENDANAAN</td>
-            <td colspan="2" align="right" width="50%" style="font-weight:bold;">CASH FLOWS FROM FINANCING ACTIVITIES</td>
+            <td colspan="2" align="left" width="50%" style="background:#ddd;padding:7px;font-weight:bold;">ARUS KAS DARI AKTIVITAS PENDANAAN</td>
+            <td colspan="2" align="right" width="50%" style="background:#ddd;padding:7px;font-weight:bold;">CASH FLOWS FROM FINANCING ACTIVITIES</td>
         </tr>
 
         <?php
                 $tak_5=0;
+                $tak_6=0;
 
                 $sqlreport_5  	="SELECT `kd_report`, `desc_report` FROM `report` WHERE kd_report='703' AND stts_report NOT LIKE '3'";
                 $queryreport_5	=mysqli_query($koneksi,$sqlreport_5);
@@ -509,9 +448,9 @@
                     $datasumformula_6  =mysqli_fetch_array($querysumformula_6);
 
                     if ($dataformula_6[2]=='D') {
-                        $totalmutasi_6=$datasumformula_6['DEBIT_6']-$datasumformula_6['KREDIT_6'];
+                        $totalmutasi_6=$datasumformula_6[0]-$datasumformula_6[1];
                     }else {
-                        $totalmutasi_6=$datasumformula_6['KREDIT_6']-$datasumformula_5['DEBIT_6'];
+                        $totalmutasi_6=$datasumformula_6[1]-$datasumformula_5[0];
                     }
                     $sf_6 += $totalmutasi_6;
 
@@ -520,8 +459,8 @@
             
 
         <tr bgcolor="whitesmoke">
-            <td align="left" width="30%"><?php echo "$dataacountg_5[0]"; ?> - <?php echo "$dataacountg_5[1]"; ?></td>
-            <td align="right">
+            <td align="left" width="30%" style="padding:3px;"><?php echo "$dataacountg_5[0]"; ?> - <?php echo "$dataacountg_5[1]"; ?></td>
+            <td align="right" style="padding:3px;">
                 <?php
                     if ($sf_5==0) {
                         echo "-";
@@ -538,7 +477,7 @@
                     }
                 ?>
             </td>
-            <td align="right">
+            <td align="right" style="padding:3px;">
                 <?php
                     if ($sf_6==0) {
                         echo "-";
@@ -555,7 +494,7 @@
                     }
                 ?>
             </td>
-            <td align="right" width="30%"><?php echo "$dataacountg_5[1]"; ?> - <?php echo "$dataacountg_5[0]"; ?></td>
+            <td align="right" width="30%" style="padding:3px;"><?php echo "$dataacountg_5[1]"; ?> - <?php echo "$dataacountg_5[0]"; ?></td>
         </tr>
 
         <?php } ?>
@@ -563,8 +502,8 @@
         <!-- batas -->
 
         <tr>
-            <td align="left" style="font-weight:bold;">Jumlah Arus Kas Bersih Aktivitas Pendanaan</td>
-            <td align="right" style="font-weight:bold;">
+            <td align="left" style="background:#ddd;padding:7px;font-weight:bold;">Jumlah Arus Kas Bersih Aktivitas Pendanaan</td>
+            <td align="right" style="background:#ddd;padding:7px;font-weight:bold;">
                 <?php
                     $potongtak_5=substr($tak_5,0,1);
                     if ($tak_5==0) {
@@ -578,7 +517,7 @@
                     }
                 ?>
             </td>
-            <td align="right" style="font-weight:bold;">
+            <td align="right" style="background:#ddd;padding:7px;font-weight:bold;">
                 <?php
                     $potongtak_6=substr($tak_6,0,1);
                     if ($tak_6==0) {
@@ -592,7 +531,7 @@
                     }
                 ?>
             </td>
-            <td align="right" style="font-weight:bold;">Total Net Cash Flow of Financing Activities</td>
+            <td align="right" style="background:#ddd;padding:7px;font-weight:bold;">Total Net Cash Flow of Financing Activities</td>
         </tr>
         <!-- end ARUS KAS DARI AKTIVITAS PENDANAAN -->
     </table>
@@ -602,11 +541,13 @@
 
 
 
-    <table style="margin-top:20px">
+
+    
+    <table width="100%" align="center" style="margin-top:10px;font-family:sans-serif; font-size:14px">
         <!-- start Kenaikan / Penurunan Kas Bersih -->
         <tr>
-            <td align="left" width="30%" style="font-weight:bold;">Kenaikan / Penurunan Kas Bersih</td>
-            <td align="right" width="20%" style="font-weight:bold;">
+            <td align="left" width="30%" style="background:#ddd;padding:7px;font-weight:bold;">Kenaikan / Penurunan Kas Bersih</td>
+            <td align="right" width="20%" style="background:#ddd;padding:7px;font-weight:bold;">
                 <?php
                     $potongkpkb_1=0;
                     $kpkb_1 = $tak_1+$tak_3+$tak_5;
@@ -622,7 +563,7 @@
                     }
                 ?>
             </td>
-            <td align="right" width="20%" style="font-weight:bold;">
+            <td align="right" width="20%" style="background:#ddd;padding:7px;font-weight:bold;">
                 <?php
                     $potongkpkb_2=0;
                     $kpkb_2 = $tak_2+$tak_4+$tak_6;
@@ -638,21 +579,23 @@
                     }
                 ?>
             </td>
-            <td align="right" width="30%" style="font-weight:bold;">Increase / Decrease in Net Cash</td>
+            <td align="right" width="30%" style="background:#ddd;padding:7px;font-weight:bold;">Increase / Decrease in Net Cash</td>
         </tr>
         <!-- end Kenaikan / Penurunan Kas Bersih -->
     </table>
 
 
 
+    
 
-    <table style="margin-top:20px">
+    <table width="100%" align="center" style="margin-top:10px;font-family:sans-serif; font-size:14px">
         <!-- start Saldo Kas Awal -->
 
         <?php
                 $ska_7=0;
                 $ska_8=0;
                 $tak_7=0;
+                $tak_8=0;
 
                 $sqlreport_7  	="SELECT `kd_report`, `desc_report` FROM `report` WHERE kd_report='601' AND stts_report NOT LIKE '3'";
                 $queryreport_7	=mysqli_query($koneksi,$sqlreport_7);
@@ -725,8 +668,8 @@
         ?>
 
         <tr>
-            <td align="left" width="30%" style="font-weight:bold;">Saldo Kas Awal</td>
-            <td align="right" width="20%" style="font-weight:bold;">
+            <td align="left" width="30%" style="background:#ddd;padding:7px;font-weight:bold;">Saldo Kas Awal</td>
+            <td align="right" width="20%" style="background:#ddd;padding:7px;font-weight:bold;">
                 <?php
                     if ($ska_7==0) {
                         echo "-";
@@ -744,7 +687,7 @@
                 ?>
             </td>
 
-            <td align="right" width="20%" style="font-weight:bold;">
+            <td align="right" width="20%" style="background:#ddd;padding:7px;font-weight:bold;">
             <?php
                     if ($ska_8==0) {
                         echo "-";
@@ -761,19 +704,9 @@
                     }
                 ?>
             </td>
-            <td align="right" width="30%" style="font-weight:bold;">Beginning Cash Balance</td>
+            <td align="right" width="30%" style="background:#ddd;padding:7px;font-weight:bold;">Beginning Cash Balance</td>
         </tr>
         <!-- end Saldo Kas Awal -->
     </table>
 
-
-    <!-- <table style="margin-top:20px">
-        <tr>
-            <td align="left" width="30%" style="font-weight:bold;">Saldo Kas Akhir</td>
-            <td align="right" style="font-weight:bold;">1 Rp. xxx</td>
-            <td align="right" style="font-weight:bold;">2 Rp. xxx</td>
-            <td align="right" width="30%" style="font-weight:bold;">Final Cash Balance</td>
-        </tr>
-    </table> -->
-
-<?php }else{echo "";} ?>
+<?php } ?>
