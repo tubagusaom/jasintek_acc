@@ -69,7 +69,7 @@
 					<input type="button" class="bback" name="back" value="Kembali">
 				</a>
 
-        <a target="_blank" onclick="return confirm('Export Excel Data Neraca Lajur ?')" href="module/laporan/view/export_neraca_lajur.php?Export-Neraca-Lajur&&blnawal=<?php echo $fbulana ?>&&blnakhir=<?php echo $fbulanb ?>&&thnlajur=<?php echo $ftahun ?>">
+        <a onclick="return confirm('Export Excel Data Neraca Lajur ?')" href="module/laporan/view/export_neraca_lajur.php?Export-Neraca-Lajur&&blnawal=<?php echo $fbulana ?>&&blnakhir=<?php echo $fbulanb ?>&&thnlajur=<?php echo $ftahun ?>">
 					<!-- <input type="button" class="import" name="export" value="Export Excel"> <i class="fa fa-home"></i> -->
 					<button type="button" class="export-excel" name="export">Export <i class="fa fa-file-excel-o"></i></button>
 				</a>
