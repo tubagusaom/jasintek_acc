@@ -298,5 +298,5 @@
 </html>
 
 <script>
-  // window.print();
+  window.print();
 </script>
