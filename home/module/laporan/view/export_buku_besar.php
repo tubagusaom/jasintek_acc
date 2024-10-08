@@ -79,7 +79,7 @@
           if ($ketacount=='M') {
             $kodeacount=substr($kka,0,1);
           }else {
-            $kodeacount=substr($kka,0,3);
+            $kodeacount=substr($kka,0,4);
           };
 
           $sqlsum	  =

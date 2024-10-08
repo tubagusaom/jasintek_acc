@@ -57,8 +57,10 @@
           if ($ketacount=='M') {
             $kodeacount=substr($kka,0,1);
           }else {
-            $kodeacount=substr($kka,0,3);
+            $kodeacount=substr($kka,0,4);
           };
+
+          // var_dump($kodeacount); die();
 
           $sqlsum	  =
                     "SELECT
@@ -296,5 +298,5 @@
 </html>
 
 <script>
-  window.print();
+  // window.print();
 </script>
